@@ -31,6 +31,10 @@
   &:hover {
     background: var(--light-color);
   }
+  &:disabled {
+    background: #C4C4C4;
+    cursor: not-allowed;
+  }
 }
 
 .container {

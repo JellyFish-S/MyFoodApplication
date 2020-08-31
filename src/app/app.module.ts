@@ -9,6 +9,9 @@ import { MainpageLoginComponent } from './mainpage-login/mainpage-login.componen
 import { AccountCreationComponent } from './account-creation/account-creation.component';
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthGuard} from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -22,9 +25,12 @@ import { StatisticsComponent } from './statistics/statistics.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

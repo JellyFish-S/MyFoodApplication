@@ -1,25 +1,61 @@
 <div class="container">
   <div class="first-screen">
-    <form class="singIn">
+    <form class="singIn" [formGroup]="form" (ngSubmit)="submit()">
       <h2>Sign in</h2>
-      <div class="form-control">
-        <input type="email" placeholder="E-mail address">
-        <div class="validation">
-          <small>Some error here</small>
+      <div
+        class="form-control"
+        [ngClass]="{invalid:form.get('email').touched && form.get('email').invalid}"
+      >
+        <input type="email" placeholder="E-mail address" formControlName="email">
+        <div
+          class="validation"
+          *ngIf="form.get('email').touched && form.get('email').invalid"
+        >
+          <small *ngIf="form.get('email').errors.required">
+            The e-mail field is empty
+          </small>
+          <small *ngIf="form.get('email').errors.email">
+            The e-mail field is incorrect</small>
         </div>
       </div>
-
-      <input type="password" placeholder="Password">
-      <div class="validation">
-        <small>Some error here</small>
+      <div
+        class="form-control"
+        [ngClass]="{invalid:form.get('password').touched && form.get('password').invalid}"
+      >
+        <input type="password" placeholder="Password" formControlName="password">
+        <div
+          class="validation"
+          *ngIf="form.get('password').touched && form.get('password').invalid"
+        >
+          <small *ngIf="form.get('password').errors.required"
+          >The password field is empty</small>
+          <small *ngIf="form.get('password').errors.minlength"
+          >The password field must contains at least {{form.get('password').errors.minlength.requiredLength}} symbols</small>
+        </div>
       </div>
       <div class="wrap">
-        <button type="submit" class="signIn-btn btn-default">Sign in</button>
-        <div class="to-register">
-          <p>New here?! </p>
-          <a routerLink="/registration" id="create-account">Create an account</a>
+        <div class="signin_registration">
+          <button
+            type="submit"
+            class="btn-default"
+            [disabled]="form.invalid || submitted"
+          >Sign in</button>
+          <div class="to-register">
+            <p>New here?! </p>
+            <a routerLink="/registration" id="create-account">Create an account</a>
+          </div>
         </div>
-      </div>
+        <div class="form-error"
+             *ngIf="auth.error$ | async as error">
+          {{error}}
+        </div>
+        <div class="form-info"
+             *ngIf="message">
+          {{message}}
+        </div>
+        </div>
+
+
     </form>
 
     <img src="assets/images/main-banner.png" alt="">
