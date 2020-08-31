@@ -2,11 +2,12 @@
   <div class="navigation">
     <a routerLink="/"><img class="logo" src="assets/images/Logo.svg" alt="MyFood"></a>
     <div class="wrap">
-      <ul class="links">
+      <ul class="links" *ngIf="auth.isAuthenticated()">
         <li><a routerLinkActive="active" routerLink="/diary">Food Diary</a></li>
         <li><a routerLinkActive="active" routerLink="/statistics">Statistics</a></li>
       </ul>
-      <a routerLink="/login" class="btn-default">Sign in</a>
+      <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()" routerLink="/login" class="btn-default">Sign out</a>
+      <a *ngIf="!auth.isAuthenticated()" routerLink="/login" class="btn-default">Sign in</a>
     </div>
   </div>
 </div>

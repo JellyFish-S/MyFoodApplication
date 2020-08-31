@@ -3,7 +3,8 @@
         <div class="introducing">
           <h1>Healthy and Harmony life</h1>
           <p>We will help you reach your weight goals.</p>
-          <button routerLink="/login" class="btn-default">Sign in</button>
+          <a *ngIf="!auth.isAuthenticated()" routerLink="/login" class="btn-default">Sign in</a>
+          <a *ngIf="auth.isAuthenticated()" (click)="auth.logout()" routerLink="/login" class="btn-default">Sign out</a>
         </div>
 
     <img src="assets/images/main-banner.png" alt="">
