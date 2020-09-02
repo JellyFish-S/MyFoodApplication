@@ -1,12 +1,27 @@
 <!--            4th STEP-->
-    <form class="steps">
-      <div class="wrap-information">
+    <form class="steps" [formGroup]="form">
+      <div class="wrap-information" >
         <p>Please add information <br> to finish registration</p>
-        <input type="text" placeholder="Username">
-        <input type="email" placeholder="E-mail address">
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Repeat password">
-        <button class="btn-default btn-register">Register</button>
+        <div class="form-control" [ngClass]="{invalid:form.get('username').touched && form.get('username').invalid}">
+          <input type="text" placeholder="Username" formControlName="username">
+        </div>
+
+        <div class="form-control" [ngClass]="{invalid:form.get('email').touched && form.get('email').invalid}">
+          <input type="email" placeholder="E-mail address" formControlName="email">
+        </div>
+        <div class="form-control" [ngClass]="{invalid:form.get('password').touched && form.get('password').invalid}">
+          <input type="password" placeholder="Password" formControlName="password">
+        </div>
+
+        <div class="form-control" [ngClass]="{invalid:form.get('passwordConfirm').touched && form.get('passwordConfirm').invalid}">
+          <input type="password" placeholder="Repeat password" formControlName="passwordConfirm">
+        </div>
+
+        <button
+          type="submit"
+          class="btn-default btn-register"
+          [disabled]="form.invalid"
+        >Register</button>
       </div>
     </form>
 

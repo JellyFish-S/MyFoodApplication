@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'mf-account-creation-main-layout',
@@ -6,11 +6,13 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./account-creation-main-layout.component.scss']
 })
 export class AccountCreationMainLayoutComponent implements OnInit {
+
   public counter = 1;
 
-  constructor() {}
+  constructor() {
+  }
 
-ngOnInit(): void {
+  ngOnInit(): void {
   }
 
   updateCounter(): void {
