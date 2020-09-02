@@ -8,3 +8,16 @@ export interface FbAuthResponse {
   idToken: string;
   expiresIn: string;
 }
+
+export interface NewAccount {
+  goal: string;
+  userParams: UserParams;
+  goalWeight: number;
+}
+
+export interface UserParams {
+  sex: string;
+  age: number;
+  height: number;
+  weight: number;
+}
