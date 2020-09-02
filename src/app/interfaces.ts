@@ -13,6 +13,7 @@ export interface NewAccount {
   goal: string;
   userParams: UserParams;
   goalWeight: number;
+  caloriesGoal: number;
 }
 
 export interface UserParams {

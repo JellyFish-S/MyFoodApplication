@@ -2,13 +2,14 @@
       <div class="steps">
       <div class="wrap-calories">
         <p>Recommended calories <br> for your goal</p>
-        <span>1 950</span>
+        <span>{{calRecommended}}</span>
         <p>You may change <br> this value:</p>
-        <input type="text" placeholder="1950" class="calorie-change">
-        <button
-          class="btn-default btn-next-3rdStep"
-          (click)="saveCalories()"
-        >Next</button>
+          <input type="number" [(ngModel)]="calFromUser" class="calorie-change" >
+          <button type="submit"
+                  class="btn-default btn-next-3rdStep"
+                  [disabled]="!calFromUser"
+                  (click)="saveCalories()"
+          >Next</button>
       </div>
     </div>
 

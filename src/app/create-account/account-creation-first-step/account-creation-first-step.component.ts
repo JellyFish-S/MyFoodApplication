@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CreateAccountService} from '../../services/create-account.service';
 import {AccountService} from '../../services/account.service';
-
+import {CalculateCaloriesService} from '../../services/calculate-calories.service';
 
 
 
@@ -18,7 +18,8 @@ export class AccountCreationFirstStepComponent implements OnInit {
 
   constructor(
     private createAccountService: CreateAccountService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private calculateCalories: CalculateCaloriesService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class AccountCreationFirstStepComponent implements OnInit {
 
   saveGoal(): void {
     this.accountService.addGoal(this.form.value.goal);
+    this.calculateCalories.addGoal(this.form.value.goal);
     this.onTheNextStep.emit(true);
   }
 

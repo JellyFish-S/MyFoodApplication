@@ -11,10 +11,58 @@
           </label>
         </div>
 
-        <input type="number" placeholder="Your age" class="personal-data" formControlName="age">
-        <input type="number" placeholder="Your height, cm" class="personal-data" formControlName="height">
-        <input type="number" placeholder="Your current weight, kg" class="personal-data" formControlName="weight">
-        <input type="number" placeholder="Your goal weight" class="personal-data" formControlName="goalWeight">
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('age').touched && form.get('age').invalid}">
+            <input type="number" placeholder="Your age" class="personal-data" formControlName="age">
+          </div>
+
+          <div class="validation"
+               *ngIf="form.get('age').touched && form.get('age').invalid"
+          >
+            <small *ngIf="form.get('age').errors.required">Enter your age</small>
+            <small *ngIf="form.get('age').errors.max">Check your age, it is too big</small>
+            <small *ngIf="form.get('age').errors.min">Your age must be at least {{form.get('age').errors.min.min}}</small>
+          </div>
+        </div>
+
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('height').touched && form.get('height').invalid}">
+            <input type="number" placeholder="Your height, cm" class="personal-data" formControlName="height">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('height').touched && form.get('height').invalid"
+          >
+            <small *ngIf="form.get('height').errors.required">Enter your height</small>
+            <small *ngIf="form.get('height').errors.max">Check your height it is too big</small>
+            <small *ngIf="form.get('height').errors.min">Your height must be at least {{form.get('height').errors.min.min}}</small>
+          </div>
+        </div>
+
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('weight').touched && form.get('weight').invalid}">
+            <input type="number" placeholder="Your current weight, kg" class="personal-data" formControlName="weight">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('weight').touched && form.get('weight').invalid"
+          >
+            <small *ngIf="form.get('weight').errors.required">Enter your height</small>
+            <small *ngIf="form.get('weight').errors.max">Check your weight it is too big</small>
+            <small *ngIf="form.get('weight').errors.min">Your weight must be at least {{form.get('weight').errors.min.min}}</small>
+          </div>
+        </div>
+
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('goalWeight').touched && form.get('goalWeight').invalid}">
+            <input type="number" placeholder="Your goal weight" class="personal-data" formControlName="goalWeight">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('goalWeight').touched && form.get('goalWeight').invalid"
+          >
+            <small *ngIf="form.get('goalWeight').errors.required">Enter your height</small>
+            <small *ngIf="form.get('goalWeight').errors.max">Check your goal weight it is too big</small>
+            <small *ngIf="form.get('goalWeight').errors.min">Your goal weight must be at least {{form.get('goalWeight').errors.min.min}}</small>
+          </div>
+        </div>
 
         <button
           type="submit"

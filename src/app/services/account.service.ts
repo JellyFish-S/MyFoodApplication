@@ -11,7 +11,8 @@ export class AccountService {
       height: null,
       weight: null
     },
-    goalWeight: null
+    goalWeight: null,
+    caloriesGoal: null
   };
 
   public addGoal(goal: string): void {
@@ -23,12 +24,16 @@ export class AccountService {
     this.account.goalWeight = goalWeight;
   }
 
+  public addCaloriesGoal(caloriesGoal: number): void {
+    this.account.caloriesGoal = caloriesGoal;
+  }
 
   public getUserParamsAndGoal(): NewAccount {
     return {
       goal: this.account.goal,
       userParams: this.account.userParams,
-      goalWeight: this.account.goalWeight
+      goalWeight: this.account.goalWeight,
+      caloriesGoal: this.account.caloriesGoal
     };
   }
 }
