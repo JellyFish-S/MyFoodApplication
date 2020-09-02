@@ -22,3 +22,9 @@ export interface UserParams {
   height: number;
   weight: number;
 }
+
+export interface ContactInfo {
+  username: string;
+  email: string;
+  password: string;
+}

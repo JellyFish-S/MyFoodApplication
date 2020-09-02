@@ -2,25 +2,59 @@
     <form class="steps" [formGroup]="form">
       <div class="wrap-information" >
         <p>Please add information <br> to finish registration</p>
-        <div class="form-control" [ngClass]="{invalid:form.get('username').touched && form.get('username').invalid}">
-          <input type="text" placeholder="Username" formControlName="username">
+
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('username').touched && form.get('username').invalid}">
+            <input type="text" placeholder="Username" formControlName="username">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('username').touched && form.get('username').invalid"
+          >
+            <small *ngIf="form.get('username').errors.required">Username field is empty</small>
+          </div>
         </div>
 
-        <div class="form-control" [ngClass]="{invalid:form.get('email').touched && form.get('email').invalid}">
-          <input type="email" placeholder="E-mail address" formControlName="email">
-        </div>
-        <div class="form-control" [ngClass]="{invalid:form.get('password').touched && form.get('password').invalid}">
-          <input type="password" placeholder="Password" formControlName="password">
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('email').touched && form.get('email').invalid}">
+            <input type="email" placeholder="E-mail address" formControlName="email">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('email').touched && form.get('email').invalid"
+          >
+            <small *ngIf="form.get('email').errors.required">E-mail field is empty</small>
+            <small *ngIf="form.get('email').errors.email"> E-mail field is incorrect</small>
+          </div>
         </div>
 
-        <div class="form-control" [ngClass]="{invalid:form.get('passwordConfirm').touched && form.get('passwordConfirm').invalid}">
-          <input type="password" placeholder="Repeat password" formControlName="passwordConfirm">
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('password').touched && form.get('password').invalid}">
+            <input type="password" placeholder="Password" formControlName="password">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('password').touched && form.get('password').invalid"
+          >
+            <small *ngIf="form.get('password').errors.required">Password field is empty</small>
+            <small *ngIf="form.get('password').errors.minlength">Password must contains <br> at least {{form.get('password').errors.minlength.requiredLength}} symbols</small>
+          </div>
+        </div>
+
+        <div class="wrap-box">
+          <div class="form-control" [ngClass]="{invalid:form.get('passwordConfirm').touched && form.get('passwordConfirm').invalid}">
+            <input type="password" placeholder="Repeat password" formControlName="passwordConfirm">
+          </div>
+          <div class="validation"
+               *ngIf="form.get('passwordConfirm').touched && form.get('passwordConfirm').invalid"
+          >
+            <small *ngIf="form.get('passwordConfirm').errors.required">Repeat the password</small>
+            <small *ngIf="form.controls.passwordConfirm.errors.mustMatch">E-mail field is incorrect</small>
+          </div>
         </div>
 
         <button
           type="submit"
           class="btn-default btn-register"
           [disabled]="form.invalid"
+          (click)="saveContactInfo()"
         >Register</button>
       </div>
     </form>

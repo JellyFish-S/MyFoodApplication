@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ComparePassword} from '../../validators/confirm-password.validator';
+import {AccountService} from '../../services/account.service';
+import {ContactInfo} from '../../interfaces';
 
 @Component({
   selector: 'mf-account-creation-fourth-step',
@@ -13,7 +15,10 @@ export class AccountCreationFourthStepComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private accountService: AccountService
+    ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -26,6 +31,12 @@ export class AccountCreationFourthStepComponent implements OnInit {
 
 
   saveContactInfo(): void {
+    const contactInfo: ContactInfo = {
+      username: this.form.value.username,
+      email: this.form.value.email,
+      password: this.form.value.password
+    };
+    this.accountService.addContactInfo(contactInfo);
     this.onTheNextStep.emit(true);
   }
 }

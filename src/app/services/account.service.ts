@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {NewAccount, UserParams} from '../interfaces';
+import {ContactInfo, NewAccount, UserParams} from '../interfaces';
 
 @Injectable()
 export class AccountService {
@@ -15,6 +15,16 @@ export class AccountService {
     caloriesGoal: null
   };
 
+  private contactInfo: ContactInfo = {
+  username: null,
+  email: null,
+  password: null
+  };
+
+  public addContactInfo(contactInfo: ContactInfo): void {
+    this.contactInfo = contactInfo;
+  }
+
   public addGoal(goal: string): void {
     this.account.goal = goal;
   }
@@ -27,6 +37,7 @@ export class AccountService {
   public addCaloriesGoal(caloriesGoal: number): void {
     this.account.caloriesGoal = caloriesGoal;
   }
+
 
   public getUserParamsAndGoal(): NewAccount {
     return {
