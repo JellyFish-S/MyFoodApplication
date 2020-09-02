@@ -6,12 +6,17 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainpageLogoutComponent } from './mainpage-logout/mainpage-logout.component';
 import { MainpageLoginComponent } from './mainpage-login/mainpage-login.component';
-import { AccountCreationComponent } from './account-creation/account-creation.component';
+import { AccountCreationFirstStepComponent } from './create-account/account-creation-first-step/account-creation-first-step.component';
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './services/auth.guard';
+import { AccountCreationSecondStepComponent } from './create-account/account-creation-second-step/account-creation-second-step.component';
+import { AccountCreationThirdStepComponent } from './create-account/account-creation-third-step/account-creation-third-step.component';
+import {AccountService} from './services/account.service';
+import { AccountCreationMainLayoutComponent } from './create-account/account-creation-main-layout/account-creation-main-layout.component';
+import { AccountCreationFourthStepComponent } from './create-account/account-creation-fourth-step/account-creation-fourth-step.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +24,13 @@ import {AuthGuard} from './services/auth.guard';
     NavbarComponent,
     MainpageLogoutComponent,
     MainpageLoginComponent,
-    AccountCreationComponent,
+    AccountCreationFirstStepComponent,
     FoodDiaryComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    AccountCreationSecondStepComponent,
+    AccountCreationThirdStepComponent,
+    AccountCreationMainLayoutComponent,
+    AccountCreationFourthStepComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,7 @@ import {AuthGuard} from './services/auth.guard';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

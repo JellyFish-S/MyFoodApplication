@@ -1,0 +1,25 @@
+<!--      2nd STEP-->
+      <form class="steps" [formGroup]="form">
+        <div class="wrap-sex">
+          <label class="sex">
+            <input type="radio" name="sex" value="male" formControlName="sex">
+            <span>Male</span>
+          </label>
+          <label class="sex">
+            <input type="radio" name="sex" value="Female" formControlName="sex">
+            <span>Female</span>
+          </label>
+        </div>
+
+        <input type="number" placeholder="Your age" class="personal-data" formControlName="age">
+        <input type="number" placeholder="Your height, cm" class="personal-data" formControlName="height">
+        <input type="number" placeholder="Your current weight, kg" class="personal-data" formControlName="weight">
+        <input type="number" placeholder="Your goal weight" class="personal-data" formControlName="goalWeight">
+
+        <button
+          type="submit"
+          class="btn-default btn-next-2ndStep"
+          [disabled]="form.invalid"
+          (click)="saveParams()"
+        >Next</button>
+      </form>

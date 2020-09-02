@@ -1,0 +1,24 @@
+    <form class="steps" [formGroup]="form">
+<!--            1st STEP-->
+            <p>What is your goal?</p>
+            <label class="question">
+              <input type="radio" name="goal" value="loose" formControlName="goal">
+              <span>Loosing weight</span>
+            </label>
+
+            <label class="question">
+              <input type="radio" name="goal" value="maintain" formControlName="goal">
+              <span>Maintain weight</span>
+            </label>
+
+            <label class="question">
+              <input type="radio" name="goal" value="gain" formControlName="goal">
+              <span>Gain weight</span>
+            </label>
+            <button type="submit"
+              class="btn-default btn-next-1stStep"
+              [disabled]="form.invalid"
+              (click)="saveGoal()"
+              >Next</button>
+    </form>
+

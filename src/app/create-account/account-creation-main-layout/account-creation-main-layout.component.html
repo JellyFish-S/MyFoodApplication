@@ -1,0 +1,29 @@
+<div class="container container-register">
+  <h2>Creating an account</h2>
+
+  <p class="step">Step {{counter}} of 4</p>
+
+  <div class="wrap">
+
+      <mf-account-creation-first-step
+        *ngIf="counter === 1"
+        (onTheNextStep)="updateCounter()">
+
+      </mf-account-creation-first-step>
+
+      <mf-account-creation-second-step
+        *ngIf="counter === 2"
+        (onTheNextStep)="updateCounter()"
+      ></mf-account-creation-second-step>
+
+      <mf-account-creation-third-step
+        *ngIf="counter === 3"
+        (onTheNextStep)="updateCounter()"
+      ></mf-account-creation-third-step>
+
+      <mf-account-creation-fourth-step
+        *ngIf="counter === 4"
+      ></mf-account-creation-fourth-step>
+
+    </div>
+</div>
