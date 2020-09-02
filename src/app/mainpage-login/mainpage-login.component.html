@@ -12,10 +12,10 @@
           *ngIf="form.get('email').touched && form.get('email').invalid"
         >
           <small *ngIf="form.get('email').errors.required">
-            The e-mail field is empty
+            E-mail field is empty
           </small>
           <small *ngIf="form.get('email').errors.email">
-            The e-mail field is incorrect</small>
+            E-mail field is incorrect</small>
         </div>
       </div>
       <div
@@ -28,9 +28,9 @@
           *ngIf="form.get('password').touched && form.get('password').invalid"
         >
           <small *ngIf="form.get('password').errors.required"
-          >The password field is empty</small>
+          >Password field is empty</small>
           <small *ngIf="form.get('password').errors.minlength"
-          >The password field must contains at least {{form.get('password').errors.minlength.requiredLength}} symbols</small>
+          >Password field must contains at least {{form.get('password').errors.minlength.requiredLength}} symbols</small>
         </div>
       </div>
       <div class="wrap">
