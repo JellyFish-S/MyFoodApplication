@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ComparePassword} from '../../validators/confirm-password.validator';
 
 @Component({
   selector: 'mf-account-creation-fourth-step',
@@ -12,15 +13,15 @@ export class AccountCreationFourthStepComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup( {
+    this.form = this.fb.group({
       username: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.email, Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       passwordConfirm: new FormControl(null, Validators.required)
-    });
+    }, {validators: ComparePassword('password', 'passwordConfirm')});
   }
 
 

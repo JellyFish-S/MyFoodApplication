@@ -9,9 +9,10 @@ export class AccountCreationMainLayoutComponent implements OnInit {
 
   public counter = 1;
 
-  constructor() {}
+  constructor() {
+  }
 
-ngOnInit(): void {
+  ngOnInit(): void {
   }
 
   updateCounter(): void {
