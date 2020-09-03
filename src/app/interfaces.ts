@@ -14,6 +14,8 @@ export interface NewAccount {
   userParams: UserParams;
   goalWeight: number;
   caloriesGoal: number;
+  username: string;
+  userId?: string;
 }
 
 export interface UserParams {

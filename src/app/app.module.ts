@@ -18,6 +18,20 @@ import {AccountCreationMainLayoutComponent} from './create-account/account-creat
 import {AccountCreationFourthStepComponent} from './create-account/account-creation-fourth-step/account-creation-fourth-step.component';
 import {AccountService} from './services/account.service';
 import {AccountCreationThirdStepComponent} from './create-account/account-creation-third-step/account-creation-third-step.component';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireModule} from '@angular/fire';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyAxXQUgyBqvqoj24U2xhwZQL3MoaqWWu0M',
+  authDomain: 'myfoodapplication-93d13.firebaseapp.com',
+  databaseURL: 'https://myfoodapplication-93d13.firebaseio.com',
+  projectId: 'myfoodapplication-93d13',
+  storageBucket: 'myfoodapplication-93d13.appspot.com',
+  messagingSenderId: '504211286601',
+  appId: '1:504211286601:web:82025f722499baa9fded98'
+};
+
+
 
 @NgModule({
   declarations: [
@@ -38,7 +52,9 @@ import {AccountCreationThirdStepComponent} from './create-account/account-creati
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [AuthGuard, AccountService, CalculateCaloriesService],
   bootstrap: [AppComponent]

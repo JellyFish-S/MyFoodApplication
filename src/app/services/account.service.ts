@@ -12,7 +12,8 @@ export class AccountService {
       weight: null
     },
     goalWeight: null,
-    caloriesGoal: null
+    caloriesGoal: null,
+    username: null
   };
 
   private contactInfo: ContactInfo = {
@@ -44,7 +45,8 @@ export class AccountService {
       goal: this.account.goal,
       userParams: this.account.userParams,
       goalWeight: this.account.goalWeight,
-      caloriesGoal: this.account.caloriesGoal
+      caloriesGoal: this.account.caloriesGoal,
+      username: this.account.username
     };
   }
 }
