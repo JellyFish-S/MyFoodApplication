@@ -45,13 +45,9 @@
             <a routerLink="/registration" id="create-account">Create an account</a>
           </div>
         </div>
-        <div class="form-error"
-             *ngIf="auth.error$ | async as error">
-          {{error}}
-        </div>
         <div class="form-info"
-             *ngIf="message">
-          {{message}}
+             *ngIf="errorForm">
+          <small>Invalid e-mail or password</small>
         </div>
         </div>
 
