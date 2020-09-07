@@ -20,6 +20,11 @@ import {AccountService} from './services/account.service';
 import {AccountCreationThirdStepComponent} from './create-account/account-creation-third-step/account-creation-third-step.component';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
+import {PostUserInformationService} from './services/post-user-information.service';
+import { LeftbarDiaryComponent } from './food-diary/leftbar-diary/leftbar-diary.component';
+import { DonutsComponent } from './food-diary/donuts/donuts.component';
+import { UserFoodDiaryComponent } from './food-diary/user-food-diary/user-food-diary.component';
+import { CalendarComponent } from './food-diary/calendar/calendar.component';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAxXQUgyBqvqoj24U2xhwZQL3MoaqWWu0M',
@@ -45,7 +50,11 @@ const firebaseConfig = {
     AccountCreationSecondStepComponent,
     AccountCreationThirdStepComponent,
     AccountCreationMainLayoutComponent,
-    AccountCreationFourthStepComponent
+    AccountCreationFourthStepComponent,
+    LeftbarDiaryComponent,
+    DonutsComponent,
+    UserFoodDiaryComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +65,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [AuthGuard, AccountService, CalculateCaloriesService],
+  providers: [AuthGuard, AccountService, CalculateCaloriesService, PostUserInformationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

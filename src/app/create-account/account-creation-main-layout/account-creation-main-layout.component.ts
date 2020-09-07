@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AccountCreationMainLayoutComponent implements OnInit {
 
-  public counter = 4;
+  public counter = 1;
 
   constructor() {
   }

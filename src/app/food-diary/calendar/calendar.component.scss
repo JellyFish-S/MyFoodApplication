@@ -1,0 +1,45 @@
+.wrap {
+  width: 450px;
+  height: 330px;
+  background: var(--backstyle-color);
+  border-radius: 0 0 30px 30px;
+  .container {
+    width: 300px;
+    height: 270px;
+    border: none;
+    border-radius: 30px;
+    background: #fff;
+    margin-bottom: 30px;
+    .month {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding-top: 30px;
+      padding-bottom: 10px;
+      i {
+        font-size: 1.8rem;
+        color: var(--light-color);
+      }
+      p {
+        font-size: 1.8rem;
+        font-weight: 800;
+      }
+    }
+    table {
+      width: 215px;
+    }
+
+    th {
+      font-size: 1rem;
+      font-weight: 600;
+      padding-bottom: 15px;
+    }
+    td {
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-align: center;
+      padding-bottom: 10px;
+    }
+
+  }
+}

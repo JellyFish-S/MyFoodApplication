@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ContactInfo, NewAccount, UserParams} from '../interfaces';
+import {ContactInfo, FirebaseUserInterface, NewAccount, UserParams} from '../interfaces';
 
 @Injectable()
 export class AccountService {
@@ -39,6 +39,18 @@ export class AccountService {
     this.account.caloriesGoal = caloriesGoal;
   }
 
+  public getUserParamsFirebase(): FirebaseUserInterface {
+    return {
+      goal: this.account.goal,
+      sex: this.account.userParams.sex,
+      age: this.account.userParams.age,
+      height: this.account.userParams.height,
+      weight: this.account.userParams.weight,
+      goalWeight: this.account.goalWeight,
+      caloriesGoal: this.account.caloriesGoal,
+      username: this.contactInfo.username
+    };
+  }
 
   public getUserParamsAndGoal(): NewAccount {
     return {

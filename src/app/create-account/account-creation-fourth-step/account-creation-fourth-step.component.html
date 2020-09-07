@@ -53,8 +53,8 @@
         <button
           type="submit"
           class="btn-default btn-register"
-          [disabled]="form.invalid"
-          (click)="saveContactInfo()"
+          [disabled]="form.invalid || submitted"
+          (click)="sendInformationToRegister()"
         >Register</button>
       </div>
     </form>
