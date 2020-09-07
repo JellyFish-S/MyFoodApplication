@@ -1,6 +1,5 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CreateAccountService} from '../../services/create-account.service';
 import {AccountService} from '../../services/account.service';
 import {CalculateCaloriesService} from '../../services/calculate-calories.service';
 
@@ -17,10 +16,10 @@ export class AccountCreationFirstStepComponent implements OnInit {
   @Output() onTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
-    private createAccountService: CreateAccountService,
     private accountService: AccountService,
     private calculateCalories: CalculateCaloriesService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -33,18 +32,4 @@ export class AccountCreationFirstStepComponent implements OnInit {
     this.calculateCalories.addGoal(this.form.value.goal);
     this.onTheNextStep.emit(true);
   }
-
-
-
-  /*
-   saveGoal(): void {
-     const user: User = {
-       userGoal: this.form.value.goal
-     };
-     this.createAccountService.create(user).subscribe(() => {
-       this.form.reset();
-     });
-   }
-  */
-
 }

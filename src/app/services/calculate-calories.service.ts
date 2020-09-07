@@ -13,7 +13,8 @@ export class CalculateCaloriesService {
       weight: null
     },
     goalWeight: null,
-    caloriesGoal: null
+    caloriesGoal: null,
+    username: null
   };
 
 
@@ -31,7 +32,8 @@ export class CalculateCaloriesService {
       goal: this.account.goal,
       userParams: this.account.userParams,
       goalWeight: this.account.goalWeight,
-      caloriesGoal: this.account.caloriesGoal
+      caloriesGoal: this.account.caloriesGoal,
+      username: this.account.username
     };
     const calorieGoalMale = (10 * acc.userParams.weight + 6.25 * acc.userParams.height - 5 * acc.userParams.age + 5) * 1.2;
     const calorieGoalFemale = (10 * acc.userParams.weight + 6.25 * acc.userParams.height - 5 * acc.userParams.age - 161) * 1.2;

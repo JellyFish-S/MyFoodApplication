@@ -4,16 +4,13 @@ export interface User {
   returnSecureToken?: boolean;
 }
 
-export interface FbAuthResponse {
-  idToken: string;
-  expiresIn: string;
-}
-
 export interface NewAccount {
   goal: string;
   userParams: UserParams;
   goalWeight: number;
   caloriesGoal: number;
+  username: string;
+  userId?: string;
 }
 
 export interface UserParams {
@@ -28,3 +25,16 @@ export interface ContactInfo {
   email: string;
   password: string;
 }
+
+export interface FirebaseUserInterface {
+  goal: string;
+  sex: string;
+  age: number;
+  height: number;
+  weight: number;
+  goalWeight: number;
+  caloriesGoal: number;
+  username: string;
+  userId?: string;
+}
+
