@@ -13,7 +13,8 @@ export class AccountService {
     },
     goalWeight: null,
     caloriesGoal: null,
-    username: null
+    username: null,
+    userId: null
   };
 
   private contactInfo: ContactInfo = {
@@ -22,6 +23,9 @@ export class AccountService {
   password: null
   };
 
+  public getUserId(userId: string): void {
+    this.account.userId = userId;
+  }
   public addContactInfo(contactInfo: ContactInfo): void {
     this.contactInfo = contactInfo;
   }
@@ -48,7 +52,8 @@ export class AccountService {
       weight: this.account.userParams.weight,
       goalWeight: this.account.goalWeight,
       caloriesGoal: this.account.caloriesGoal,
-      username: this.contactInfo.username
+      username: this.contactInfo.username,
+      userId: this.account.userId
     };
   }
 

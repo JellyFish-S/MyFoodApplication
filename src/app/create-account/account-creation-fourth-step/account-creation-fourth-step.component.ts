@@ -51,7 +51,7 @@ export class AccountCreationFourthStepComponent implements OnInit {
     this.onTheNextStep.emit(true);
     try {
       const auth: UserCredential = await this.registrationService.register(contactInfo.email, contactInfo.password);
-      const userId = auth.user.uid;
+      const userId = this.accountService.getUserId(auth.user.uid);
       this.submitted = false;
       this.errorForm = false;
       const userParamsAndGoal: FirebaseUserInterface = this.accountService.getUserParamsFirebase();
