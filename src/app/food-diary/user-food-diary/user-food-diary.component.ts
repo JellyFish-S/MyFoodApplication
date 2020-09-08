@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DateService} from '../../services/date.service';
 
 @Component({
   selector: 'mf-user-food-diary',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserFoodDiaryComponent implements OnInit {
 
-  constructor() { }
+  constructor(public  dateService: DateService) { }
 
   ngOnInit(): void {
   }
