@@ -50,3 +50,12 @@ export interface Day {
 export interface Week {
   days: Day[];
 }
+
+export interface ProductsDB {
+  name: string;
+  protein: number;
+  fat: number;
+  carbohydrate: number;
+  calories: number;
+  weight: number;
+}
