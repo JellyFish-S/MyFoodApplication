@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DateService} from '../../services/date.service';
 import {Week} from '../../interfaces';
 import * as moment from 'moment';
+import 'moment/locale/ru';
 
 @Component({
   selector: 'mf-calendar',
@@ -27,7 +28,7 @@ export class CalendarComponent implements OnInit {
     const startDay = now.clone().startOf('month').startOf('week');
     const endDay = now.clone().endOf('month').endOf('week');
 
-    const date = startDay.clone().subtract(0, 'day');
+    const date = startDay.clone().subtract(1, 'day');
     const calendar = [];
     while (date.isBefore(endDay, 'day')) {
       calendar.push({

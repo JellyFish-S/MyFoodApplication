@@ -12,4 +12,5 @@ export class UserFoodDiaryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }
