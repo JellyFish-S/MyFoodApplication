@@ -28,6 +28,7 @@ import { CalendarComponent } from './food-diary/calendar/calendar.component';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {CheckUserIdService} from './services/check-user-id.service';
 import * as firebase from 'firebase';
+import {MomentPipe} from './pipes/moment.pipe';
 
 
 
@@ -60,7 +61,8 @@ firebase.initializeApp(firebaseConfig);
     LeftbarDiaryComponent,
     DonutsComponent,
     UserFoodDiaryComponent,
-    CalendarComponent
+    CalendarComponent,
+    MomentPipe
   ],
   imports: [
     BrowserModule,
