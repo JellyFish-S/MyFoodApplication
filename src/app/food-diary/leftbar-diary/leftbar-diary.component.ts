@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CheckUserIdService} from '../../services/check-user-id.service';
+import {FirebaseUserInterface} from '../../interfaces';
+
 
 @Component({
   selector: 'mf-leftbar-diary',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./leftbar-diary.component.scss']
 })
 export class LeftbarDiaryComponent implements OnInit {
+  userInformation: FirebaseUserInterface;
+  public isLoaded = false;
 
-  constructor() { }
+  constructor(
+    private checkUserIdService: CheckUserIdService
+  ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    this.userInformation = await this.checkUserIdService.getUserInformationFromFirebase();
+    this.isLoaded = true;
   }
 
 }

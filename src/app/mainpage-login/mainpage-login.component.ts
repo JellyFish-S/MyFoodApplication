@@ -57,23 +57,13 @@ export class MainpageLoginComponent implements OnInit {
       if (auth.user.uid) {
         this.form.reset();
         this.router.navigate(['/diary']);
-        this.submitted = false;
         this.errorForm = false;
       } else {
         this.submitted = false;
       }
     } catch (error) {
        this.errorForm = true;
+       this.submitted = false;
     }
-
-
-    // this.auth.login1(user.email, user.password).then(() => {
-    //   console.log()
-    //
-    //   this.router.navigate(['/diary']);
-    //   this.submitted = false;
-    // }, () => {
-    //   this.submitted = false;
-    // });
   }
 }

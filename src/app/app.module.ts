@@ -18,13 +18,18 @@ import {AccountCreationMainLayoutComponent} from './create-account/account-creat
 import {AccountCreationFourthStepComponent} from './create-account/account-creation-fourth-step/account-creation-fourth-step.component';
 import {AccountService} from './services/account.service';
 import {AccountCreationThirdStepComponent} from './create-account/account-creation-third-step/account-creation-third-step.component';
-import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {PostUserInformationService} from './services/post-user-information.service';
 import { LeftbarDiaryComponent } from './food-diary/leftbar-diary/leftbar-diary.component';
 import { DonutsComponent } from './food-diary/donuts/donuts.component';
 import { UserFoodDiaryComponent } from './food-diary/user-food-diary/user-food-diary.component';
 import { CalendarComponent } from './food-diary/calendar/calendar.component';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {CheckUserIdService} from './services/check-user-id.service';
+import * as firebase from 'firebase';
+
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAxXQUgyBqvqoj24U2xhwZQL3MoaqWWu0M',
@@ -36,6 +41,7 @@ const firebaseConfig = {
   appId: '1:504211286601:web:82025f722499baa9fded98'
 };
 
+firebase.initializeApp(firebaseConfig);
 
 
 @NgModule({
@@ -62,10 +68,17 @@ const firebaseConfig = {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule
   ],
-  providers: [AuthGuard, AccountService, CalculateCaloriesService, PostUserInformationService],
+  providers: [
+    AuthGuard,
+    AccountService,
+    CalculateCaloriesService,
+    PostUserInformationService,
+    CheckUserIdService,
+    AngularFireDatabase,
+    AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

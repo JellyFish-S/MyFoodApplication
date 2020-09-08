@@ -1,5 +1,5 @@
-<div class="wrap">
-  <h3>Hi, Alexandra!</h3>
+<div class="wrap" *ngIf="isLoaded">
+  <h3>Hi, {{userInformation.username}}!</h3>
 
   <mf-donuts></mf-donuts>
 
@@ -7,12 +7,12 @@
     <div class="weight-info">
       <p>Current weight</p>
       <small>19.08.2020</small>
-      <p class="current-number">70.6 kg</p>
+      <p class="current-number">{{userInformation.weight}} kg</p>
       <i class="fa fa-plus"></i>
     </div>
     <div class="calorie-info">
       <p>Current calorie <br> goal</p>
-      <p class="current-number">2400 ccal</p>
+      <p class="current-number">{{userInformation.caloriesGoal}} ccal</p>
       <i class="fa fa-plus"></i>
     </div>
   </div>
