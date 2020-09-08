@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export interface User {
   email: string;
   password: string;
@@ -38,3 +40,13 @@ export interface FirebaseUserInterface {
   userId?: string;
 }
 
+export interface Day {
+  value: moment.Moment;
+  active: boolean;
+  disabled: boolean;
+  selected: boolean;
+}
+
+export interface Week {
+  days: Day[];
+}
