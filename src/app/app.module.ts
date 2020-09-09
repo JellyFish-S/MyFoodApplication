@@ -32,6 +32,7 @@ import {MomentPipe} from './pipes/moment.pipe';
 
 
 
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAxXQUgyBqvqoj24U2xhwZQL3MoaqWWu0M',
   authDomain: 'myfoodapplication-93d13.firebaseapp.com',

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DateService} from '../../services/date.service';
+import {ProductsDB} from '../../interfaces';
+import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-diary.service';
 
 
 
@@ -9,12 +11,19 @@ import {DateService} from '../../services/date.service';
   styleUrls: ['./user-food-diary.component.scss']
 })
 export class UserFoodDiaryComponent implements OnInit {
+  isOpen = false;
+  productsDB: ProductsDB[] = [];
 
   constructor(
-    public  dateService: DateService
+    public  dateService: DateService,
+    public addProductToFoodDiaryService: AddProductToFoodDiaryService
     ) { }
 
   ngOnInit(): void {
+  }
+
+  openSearchBar(): void {
+    this.isOpen = !this.isOpen;
   }
 
   // sendProductToFB() {

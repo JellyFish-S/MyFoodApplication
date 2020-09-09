@@ -1,6 +1,38 @@
 <div class="wrap">
 
 <!--  <button class="btn-default" (click)="sendProductToFB()">Send product</button>-->
+
+      <div class="form-control" *ngIf="isOpen">
+        <div class="searchbar">
+          <input type="text" placeholder="Search products" [(ngModel)]="addProductToFoodDiaryService.searchText" (input)="addProductToFoodDiaryService.getProductInformationFromFB()" >
+          <i class="fa fa-times" (click)="openSearchBar()"></i>
+        </div>
+        <table *ngIf="addProductToFoodDiaryService.searchText">
+          <thead class="table-header">
+          <th class="product">product</th>
+          <th>protein</th>
+          <th>fat</th>
+          <th>carbohydrate</th>
+          <th>calories</th>
+          <th>grammes</th>
+          <th></th>
+          </thead>
+          <tbody>
+          <tr
+            *ngFor="let product of addProductToFoodDiaryService.arrOfProd"
+            >
+              <td class="product-name">{{product.name}}</td>
+              <td>{{product.protein}}</td>
+              <td>{{product.fat}}</td>
+              <td>{{product.carbohydrate}}</td>
+              <td>{{product.calories}}</td>
+              <td><input type="number" value="{{product.weight}}">  gr</td>
+              <td class="add-food"><i class="fa fa-plus"></i></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
   <table>
 
     <thead class="table-header">
@@ -14,7 +46,6 @@
       <th class="data">{{dateService.date | async | moment: 'DD.MM.YYYY'}}</th>
     </tr>
     </thead>
-
     <tbody>
 
     <tr class="food">
@@ -23,7 +54,7 @@
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food"><i class="fa fa-plus"></i></td>
+      <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
       <td class="open-products"><i class="fa fa-chevron-down"></i></td>
     </tr>
     <tr class="products">
@@ -59,7 +90,7 @@
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food"><i class="fa fa-plus"></i></td>
+      <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
       <td class="open-products"><i class="fa fa-chevron-down"></i></td>
     </tr>
     <tr class="food">
@@ -68,7 +99,7 @@
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food"><i class="fa fa-plus"></i></td>
+      <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
       <td class="open-products"><i class="fa fa-chevron-down"></i></td>
     </tr>
     </tbody>
