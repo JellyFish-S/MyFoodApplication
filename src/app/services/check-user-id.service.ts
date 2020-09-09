@@ -5,7 +5,6 @@ import {FirebaseUserInterface} from '../interfaces';
 
 @Injectable()
 export class CheckUserIdService {
-  identityId: boolean;
 
   async getUserInformationFromFirebase(): Promise<FirebaseUserInterface> {
     const dataSnapShot = await firebase.database().ref('users/').once('value');
