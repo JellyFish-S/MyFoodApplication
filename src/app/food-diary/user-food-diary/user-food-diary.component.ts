@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DateService} from '../../services/date.service';
 import {ProductsDB} from '../../interfaces';
 import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-diary.service';
-
 
 
 @Component({
@@ -12,12 +11,17 @@ import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-d
 })
 export class UserFoodDiaryComponent implements OnInit {
   isOpen = false;
-  productsDB: ProductsDB[] = [];
+  productDB: ProductsDB;
+  arrOfProd: ProductsDB[] = [];
+  searchText = '';
+  weight = 100;
+  isInvalid: boolean;
 
   constructor(
     public  dateService: DateService,
     public addProductToFoodDiaryService: AddProductToFoodDiaryService
-    ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -25,6 +29,34 @@ export class UserFoodDiaryComponent implements OnInit {
   openSearchBar(): void {
     this.isOpen = !this.isOpen;
   }
+
+  public fetchProducts(): void {
+    console.log(this.arrOfProd);
+    console.log(this.searchText);
+    this.addProductToFoodDiaryService.getProductInformationFromFB(this.searchText)
+      .then(array => {
+        console.log(this.arrOfProd);
+        console.log(this.searchText);
+        this.arrOfProd = array;
+      });
+  }
+
+
+  public changeWeight(weightGr: number, idx: number): void {
+    console.log('sdfg');
+
+    this.addProductToFoodDiaryService.getProductInformationFromFB(this.searchText)
+      .then(array => {
+        this.arrOfProd = array;
+        array[idx].weight = weightGr;
+        array[idx].protein = Math.round(array[idx].protein * (weightGr / 100));
+        array[idx].fat = Math.round(array[idx].fat * (weightGr / 100));
+        array[idx].carbohydrate = Math.round(array[idx].carbohydrate * (weightGr / 100));
+        array[idx].calories = Math.round(array[idx].calories * (weightGr / 100));
+        return array[idx];
+        });
+  }
+
 
   // sendProductToFB() {
   //   const product: ProductsDB = {

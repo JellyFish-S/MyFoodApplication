@@ -124,6 +124,17 @@
 .form-control {
     position: absolute;
     max-width: 810px;
+  .message {
+    p {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #3F3D56;
+      font-weight: 600;
+    }
+    background: var(--backstyle-color);
+    padding: 20px;
+  }
+
   .searchbar {
     width: 810px;
     padding: 20px 30px;
@@ -207,3 +218,4 @@
     }
   }
 }
+
