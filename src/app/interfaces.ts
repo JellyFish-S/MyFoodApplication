@@ -59,3 +59,13 @@ export interface ProductsDB {
   calories: number;
   weight: number;
 }
+
+export interface UserFood {
+  name: string;
+  protein: number;
+  fat: number;
+  carbohydrate: number;
+  calories: number;
+  weight: number;
+  date: string;
+}

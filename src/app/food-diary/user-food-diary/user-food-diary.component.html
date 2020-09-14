@@ -4,10 +4,17 @@
 
       <div class="form-control" *ngIf="isOpen">
         <div class="searchbar">
-          <input type="text" placeholder="Search products" [(ngModel)]="addProductToFoodDiaryService.searchText" (input)="addProductToFoodDiaryService.getProductInformationFromFB()" >
+          <input type="text" placeholder="Search products" [(ngModel)]="searchText" (input)="fetchProducts()">
           <i class="fa fa-times" (click)="openSearchBar()"></i>
         </div>
-        <table *ngIf="addProductToFoodDiaryService.searchText">
+
+        <ng-template #noProduct>
+          <div class="message">
+            <p>Product doesn't exist or not introduced</p>
+          </div>
+        </ng-template>
+
+        <table *ngIf="searchText && arrOfProd.length != 0; else noProduct">
           <thead class="table-header">
           <th class="product">product</th>
           <th>protein</th>
@@ -19,14 +26,14 @@
           </thead>
           <tbody>
           <tr
-            *ngFor="let product of addProductToFoodDiaryService.arrOfProd"
+            *ngFor="let product of arrOfProd; let i = index"
             >
-              <td class="product-name">{{product.name}}</td>
-              <td>{{product.protein}}</td>
-              <td>{{product.fat}}</td>
-              <td>{{product.carbohydrate}}</td>
-              <td>{{product.calories}}</td>
-              <td><input type="number" value="{{product.weight}}">  gr</td>
+              <td class="product-name" >{{arrOfProd[i].name}}</td>
+              <td>{{arrOfProd[i].protein}}</td>
+              <td>{{arrOfProd[i].fat}}</td>
+              <td>{{arrOfProd[i].carbohydrate}}</td>
+              <td>{{arrOfProd[i].calories}}</td>
+              <td><input type="number" [(ngModel)]="arrOfProd[i].weight" (change)="changeWeight(arrOfProd[i].weight, i)">  gr</td>
               <td class="add-food"><i class="fa fa-plus"></i></td>
           </tr>
           </tbody>

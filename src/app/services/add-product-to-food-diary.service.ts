@@ -10,19 +10,21 @@ export class AddProductToFoodDiaryService {
   arrOfProd: ProductsDB[] = [];
   searchText: string;
 
-  async getProductInformationFromFB(): Promise<any> {
+  async getProductInformationFromFB(searchText: string): Promise<any> {
     this.arrOfProd = [];
-    if (this.searchText) {
+    if (searchText) {
        await firebase.database().ref('products/')
         .orderByChild('name')
-        .startAt(this.searchText.trim().toLowerCase())
-        .endAt(this.searchText.trim().toLowerCase() + '\uf8ff')
+        .startAt(searchText.trim().toLowerCase())
+        .endAt(searchText.trim().toLowerCase() + '\uf8ff')
         .on('child_added', (snapshot) => {
           this.productDB = snapshot.val();
           this.arrOfProd.push(this.productDB);
         });
     }
+
     return this.arrOfProd;
   }
+
 }
 
