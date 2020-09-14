@@ -82,6 +82,7 @@ firebase.initializeApp(firebaseConfig);
     CheckUserIdService,
     AngularFireDatabase,
     AngularFireAuth],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

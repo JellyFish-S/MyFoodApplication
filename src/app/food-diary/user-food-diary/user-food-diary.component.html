@@ -34,7 +34,7 @@
               <td>{{arrOfProd[i].carbohydrate}}</td>
               <td>{{arrOfProd[i].calories}}</td>
               <td><input type="number" [(ngModel)]="arrOfProd[i].weight" (change)="changeWeight(arrOfProd[i].weight, i)">  gr</td>
-              <td class="add-food"><i class="fa fa-plus"></i></td>
+              <td class="add-food" (click)="sendUserProduct(i)"><i class="fa fa-plus"></i></td>
           </tr>
           </tbody>
         </table>
@@ -53,35 +53,37 @@
       <th class="data">{{dateService.date | async | moment: 'DD.MM.YYYY'}}</th>
     </tr>
     </thead>
-    <tbody>
 
-    <tr class="food">
+
+    <tr
+      class="food"
+    >
       <td class="eating-name">Breakfast</td>
       <td>21.1</td>
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
       <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
-      <td class="open-products"><i class="fa fa-chevron-down"></i></td>
+      <td class="open-products"  (click)="openFood()">
+        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
+        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      </td>
     </tr>
-    <tr class="products">
-      <td class="product-name">Milk, 2.5%</td>
-      <td>21.1</td>
-      <td>12.6</td>
-      <td>45.5</td>
-      <td>425</td>
-      <td><input type="text" value="120"> gr </td>
+    <tbody *ngIf="loadFood">
+    <tr class="products"
+        *ngFor="let product of userProductsArray; let i = index"
+    >
+      <td class="product-name">{{product.name}}</td>
+      <td>{{product.protein}}</td>
+      <td>{{product.fat}}</td>
+      <td>{{product.carbohydrate}}</td>
+      <td>{{product.calories}}</td>
+      <td><input type="number" [(ngModel)]="product.weight"> gr </td>
       <td class="delete"><i class="fa fa-minus"></i></td>
     </tr>
-    <tr class="products">
-      <td class="product-name">Milk, 2.5%</td>
-      <td>21.1</td>
-      <td>12.6</td>
-      <td>45.5</td>
-      <td>425</td>
-      <td><input type="text" value="120"> gr </td>
-      <td class="delete"><i class="fa fa-minus"></i></td>
-    </tr>
+    </tbody>
+
+
     <tr class="food">
       <td class="eating-name">Lunch</td>
       <td>21.1</td>
@@ -109,6 +111,6 @@
       <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
       <td class="open-products"><i class="fa fa-chevron-down"></i></td>
     </tr>
-    </tbody>
+
   </table>
 </div>

@@ -1,7 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {DateService} from '../../services/date.service';
-import {ProductsDB} from '../../interfaces';
+import {ProductsDB, UserFood} from '../../interfaces';
 import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-diary.service';
+import {PostUserFoodService} from '../../services/post-user-food.service';
+import {CheckUserIdService} from '../../services/check-user-id.service';
+import {GetUserFoodService} from '../../services/get-user-food.service';
+import {switchMap} from 'rxjs/operators';
 
 
 @Component({
@@ -11,19 +15,34 @@ import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-d
 })
 export class UserFoodDiaryComponent implements OnInit {
   isOpen = false;
+  loadFood = false;
   productDB: ProductsDB;
   arrOfProd: ProductsDB[] = [];
   searchText = '';
   weight = 100;
   isInvalid: boolean;
+  userProductsArray: UserFood[] = [];
 
   constructor(
     public  dateService: DateService,
-    public addProductToFoodDiaryService: AddProductToFoodDiaryService
+    public addProductToFoodDiaryService: AddProductToFoodDiaryService,
+    public postUserFood: PostUserFoodService,
+    public checkUserIdService: CheckUserIdService,
+    public getUserFoodFromFirebase: GetUserFoodService
   ) {
   }
 
   ngOnInit(): void {
+     this.dateService.date.pipe(
+      switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebase(value))
+    ).subscribe(userFood => {
+      this.userProductsArray = userFood;
+      console.log(this.userProductsArray);
+    });
+  }
+
+  openFood(): void {
+    this.loadFood = !this.loadFood;
   }
 
   openSearchBar(): void {
@@ -31,20 +50,16 @@ export class UserFoodDiaryComponent implements OnInit {
   }
 
   public fetchProducts(): void {
-    console.log(this.arrOfProd);
-    console.log(this.searchText);
     this.addProductToFoodDiaryService.getProductInformationFromFB(this.searchText)
       .then(array => {
-        console.log(this.arrOfProd);
-        console.log(this.searchText);
+        // console.log(this.arrOfProd);
+        // console.log(this.searchText);
         this.arrOfProd = array;
       });
   }
 
 
   public changeWeight(weightGr: number, idx: number): void {
-    console.log('sdfg');
-
     this.addProductToFoodDiaryService.getProductInformationFromFB(this.searchText)
       .then(array => {
         this.arrOfProd = array;
@@ -57,6 +72,24 @@ export class UserFoodDiaryComponent implements OnInit {
         });
   }
 
+  public async sendUserProduct(idx: number): Promise<UserFood> {
+
+    const userProduct: UserFood = {
+      name: this.arrOfProd[idx].name,
+      protein: this.arrOfProd[idx].protein,
+      fat: this.arrOfProd[idx].fat,
+      carbohydrate: this.arrOfProd[idx].carbohydrate,
+      calories: this.arrOfProd[idx].calories,
+      weight: this.arrOfProd[idx].weight,
+      date: this.dateService.date.value.format('DD-MM-YYYY'),
+      userId: await this.checkUserIdService.getUserId()
+    };
+    console.log(userProduct);
+    this.postUserFood.create(userProduct).subscribe(() => {
+      console.log('Added');
+    });
+    return userProduct;
+  }
 
   // sendProductToFB() {
   //   const product: ProductsDB = {
@@ -71,5 +104,6 @@ export class UserFoodDiaryComponent implements OnInit {
   //     console.log('success');
   //   });
   // }
+
 
 }

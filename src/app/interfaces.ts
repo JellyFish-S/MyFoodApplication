@@ -68,4 +68,5 @@ export interface UserFood {
   calories: number;
   weight: number;
   date: string;
+  userId?: string;
 }
