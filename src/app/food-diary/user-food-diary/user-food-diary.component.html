@@ -34,7 +34,10 @@
               <td>{{arrOfProd[i].carbohydrate}}</td>
               <td>{{arrOfProd[i].calories}}</td>
               <td><input type="number" [(ngModel)]="arrOfProd[i].weight" (change)="changeWeight(arrOfProd[i].weight, i)">  gr</td>
-              <td class="add-food" (click)="sendUserProduct(i)"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 0" (click)="sendUserBreakfast(i)"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 1" (click)="sendUserLunch(i)"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 2" (click)="sendUserDinner(i)"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 3" (click)="sendUserSnack(i)"><i class="fa fa-plus"></i></td>
           </tr>
           </tbody>
         </table>
@@ -54,63 +57,112 @@
     </tr>
     </thead>
 
-
     <tr
-      class="food"
-    >
-      <td class="eating-name">Breakfast</td>
+      class="food">
+      <td class="eating-name">{{foodType[0]}}</td>
       <td>21.1</td>
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
+      <td class="add-food" (click)="openSearchBar(); idx = 0"><i class="fa fa-plus"></i></td>
       <td class="open-products"  (click)="openFood()">
         <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
         <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
       </td>
     </tr>
     <tbody *ngIf="loadFood">
-    <tr class="products"
-        *ngFor="let product of userProductsArray; let i = index"
-    >
-      <td class="product-name">{{product.name}}</td>
-      <td>{{product.protein}}</td>
-      <td>{{product.fat}}</td>
-      <td>{{product.carbohydrate}}</td>
-      <td>{{product.calories}}</td>
-      <td><input type="number" [(ngModel)]="product.weight"> gr </td>
-      <td class="delete"><i class="fa fa-minus"></i></td>
-    </tr>
+      <tr class="products"
+          *ngFor="let product of userProductsBreakfast; let i = index"
+      >
+        <td class="product-name">{{product.name}}</td>
+        <td>{{product.protein}}</td>
+        <td>{{product.fat}}</td>
+        <td>{{product.carbohydrate}}</td>
+        <td>{{product.calories}}</td>
+        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td class="delete"><i class="fa fa-minus"></i></td>
+      </tr>
     </tbody>
 
 
     <tr class="food">
-      <td class="eating-name">Lunch</td>
+      <td class="eating-name">{{foodType[1]}}</td>
       <td>21.1</td>
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food"><i class="fa fa-plus"></i></td>
-      <td class="open-products"><i class="fa fa-chevron-down"></i></td>
+      <td class="add-food" (click)="openSearchBar(); idx = 1" ><i class="fa fa-plus"></i></td>
+      <td class="open-products"  (click)="openFood()">
+        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
+        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      </td>
     </tr>
+
+    <tbody *ngIf="loadFood">
+      <tr class="products"
+          *ngFor="let product of userProductsLunch; let i = index"
+      >
+        <td class="product-name">{{product.name}}</td>
+        <td>{{product.protein}}</td>
+        <td>{{product.fat}}</td>
+        <td>{{product.carbohydrate}}</td>
+        <td>{{product.calories}}</td>
+        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td class="delete"><i class="fa fa-minus"></i></td>
+      </tr>
+    </tbody>
+
     <tr class="food">
-      <td class="eating-name">Dinner</td>
+      <td class="eating-name">{{foodType[2]}}</td>
       <td>21.1</td>
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
-      <td class="open-products"><i class="fa fa-chevron-down"></i></td>
+      <td class="add-food" (click)="openSearchBar(); idx = 2"><i class="fa fa-plus"></i></td>
+      <td class="open-products"  (click)="openFood()">
+        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
+        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      </td>
     </tr>
+    <tbody *ngIf="loadFood">
+      <tr class="products"
+          *ngFor="let product of userProductsDinner; let i = index"
+      >
+        <td class="product-name">{{product.name}}</td>
+        <td>{{product.protein}}</td>
+        <td>{{product.fat}}</td>
+        <td>{{product.carbohydrate}}</td>
+        <td>{{product.calories}}</td>
+        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td class="delete"><i class="fa fa-minus"></i></td>
+      </tr>
+    </tbody>
+
     <tr class="food">
-      <td class="eating-name">Snack</td>
+      <td class="eating-name">{{foodType[3]}}</td>
       <td>21.1</td>
       <td>12.6</td>
       <td>45.5</td>
       <td>425</td>
-      <td class="add-food" (click)="openSearchBar()"><i class="fa fa-plus"></i></td>
-      <td class="open-products"><i class="fa fa-chevron-down"></i></td>
+      <td class="add-food" (click)="openSearchBar(); idx = 3"><i class="fa fa-plus"></i></td>
+      <td class="open-products"  (click)="openFood()">
+        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
+        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      </td>
     </tr>
+    <tbody *ngIf="loadFood">
+      <tr class="products"
+          *ngFor="let product of userProductsSnack; let i = index"
+      >
+        <td class="product-name">{{product.name}}</td>
+        <td>{{product.protein}}</td>
+        <td>{{product.fat}}</td>
+        <td>{{product.carbohydrate}}</td>
+        <td>{{product.calories}}</td>
+        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td class="delete"><i class="fa fa-minus"></i></td>
+      </tr>
+    </tbody>
 
   </table>
 </div>

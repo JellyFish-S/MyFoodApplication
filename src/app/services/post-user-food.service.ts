@@ -12,7 +12,16 @@ export class PostUserFoodService {
   constructor(private http: HttpClient) {
   }
 
-  create(product: UserFood): Observable<UserFood> {
+  createBreakfast(product: UserFood): Observable<UserFood> {
     return this.http.post<UserFood>(`${environment.fbDbUrl}/breakfast/${product.date}.json`, product);
+  }
+  createLunch(product: UserFood): Observable<UserFood> {
+    return this.http.post<UserFood>(`${environment.fbDbUrl}/lunch/${product.date}.json`, product);
+  }
+  createDinner(product: UserFood): Observable<UserFood> {
+    return this.http.post<UserFood>(`${environment.fbDbUrl}/dinner/${product.date}.json`, product);
+  }
+  createSnack(product: UserFood): Observable<UserFood> {
+    return this.http.post<UserFood>(`${environment.fbDbUrl}/snack/${product.date}.json`, product);
   }
 }
