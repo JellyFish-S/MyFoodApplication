@@ -14,6 +14,7 @@ import {switchMap} from 'rxjs/operators';
   styleUrls: ['./user-food-diary.component.scss']
 })
 export class UserFoodDiaryComponent implements OnInit {
+  foodType = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   isOpen = false;
   loadFood = false;
   productDB: ProductsDB;
@@ -21,7 +22,11 @@ export class UserFoodDiaryComponent implements OnInit {
   searchText = '';
   weight = 100;
   isInvalid: boolean;
-  userProductsArray: UserFood[] = [];
+  userProductsBreakfast: UserFood[] = [];
+  userProductsLunch: UserFood[] = [];
+  userProductsDinner: UserFood[] = [];
+  userProductsSnack: UserFood[] = [];
+  idx: number;
 
   constructor(
     public  dateService: DateService,
@@ -34,10 +39,24 @@ export class UserFoodDiaryComponent implements OnInit {
 
   ngOnInit(): void {
      this.dateService.date.pipe(
-      switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebase(value))
+      switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseBreakfast(value))
     ).subscribe(userFood => {
-      this.userProductsArray = userFood;
-      console.log(this.userProductsArray);
+      this.userProductsBreakfast = userFood;
+    });
+     this.dateService.date.pipe(
+      switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseLunch(value))
+    ).subscribe(userFood => {
+      this.userProductsLunch = userFood;
+    });
+     this.dateService.date.pipe(
+      switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseDinner(value))
+    ).subscribe(userFood => {
+      this.userProductsDinner = userFood;
+    });
+     this.dateService.date.pipe(
+      switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseSnack(value))
+    ).subscribe(userFood => {
+      this.userProductsSnack = userFood;
     });
   }
 
@@ -72,7 +91,7 @@ export class UserFoodDiaryComponent implements OnInit {
         });
   }
 
-  public async sendUserProduct(idx: number): Promise<UserFood> {
+  public async sendUserFood(idx: number): Promise<UserFood> {
 
     const userProduct: UserFood = {
       name: this.arrOfProd[idx].name,
@@ -84,13 +103,43 @@ export class UserFoodDiaryComponent implements OnInit {
       date: this.dateService.date.value.format('DD-MM-YYYY'),
       userId: await this.checkUserIdService.getUserId()
     };
-    console.log(userProduct);
-    this.postUserFood.create(userProduct).subscribe(() => {
-      console.log('Added');
-    });
     return userProduct;
   }
 
+  public async sendUserBreakfast(idx: number): Promise<any> {
+    await this.sendUserFood(idx).then((foodObj) => {
+      this.postUserFood.createBreakfast(foodObj).subscribe(() => {
+        console.log('Added');
+        return foodObj;
+      });
+    });
+  }
+
+  public async sendUserLunch(idx: number): Promise<any> {
+    await this.sendUserFood(idx).then((foodObj) => {
+      this.postUserFood.createLunch(foodObj).subscribe(() => {
+        console.log('Added');
+        return foodObj;
+      });
+    });
+  }
+
+  public async sendUserDinner(idx: number): Promise<any> {
+    await this.sendUserFood(idx).then((foodObj) => {
+      this.postUserFood.createDinner(foodObj).subscribe(() => {
+        console.log('Added');
+        return foodObj;
+      });
+    });
+  }
+  public async sendUserSnack(idx: number): Promise<any> {
+    await this.sendUserFood(idx).then((foodObj) => {
+      this.postUserFood.createSnack(foodObj).subscribe(() => {
+        console.log('Added');
+        return foodObj;
+      });
+    });
+  }
   // sendProductToFB() {
   //   const product: ProductsDB = {
   //     name: 'Coffee Cappuccino',
