@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {UserFood} from '../interfaces';
 import * as firebase from 'firebase';
 import * as moment from 'moment';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 
 @Injectable({
@@ -9,8 +11,8 @@ import * as moment from 'moment';
 })
 export class GetUserFoodService {
   productsArray: UserFood[] = [];
-
-  constructor() {
+  url = 'https://myfoodapplication-93d13.firebaseio.com';
+  constructor(private http: HttpClient) {
   }
 
   async GetUserFoodFromFirebaseBreakfast(date: moment.Moment): Promise<UserFood[]> {
@@ -19,7 +21,7 @@ export class GetUserFoodService {
     const user = await firebase.auth().currentUser;
     this.productsArray = [];
     for (const key in objDatabase) {
-      if (objDatabase[key].userId === user.uid ) {
+      if (objDatabase[key].userId === user.uid) {
         this.productsArray.push(objDatabase[key]);
       }
     }
@@ -32,7 +34,7 @@ export class GetUserFoodService {
     const user = await firebase.auth().currentUser;
     this.productsArray = [];
     for (const key in objDatabase) {
-      if (objDatabase[key].userId === user.uid ) {
+      if (objDatabase[key].userId === user.uid) {
         this.productsArray.push(objDatabase[key]);
       }
     }
@@ -45,7 +47,7 @@ export class GetUserFoodService {
     const user = await firebase.auth().currentUser;
     this.productsArray = [];
     for (const key in objDatabase) {
-      if (objDatabase[key].userId === user.uid ) {
+      if (objDatabase[key].userId === user.uid) {
         this.productsArray.push(objDatabase[key]);
       }
     }
@@ -58,11 +60,24 @@ export class GetUserFoodService {
     const user = await firebase.auth().currentUser;
     this.productsArray = [];
     for (const key in objDatabase) {
-      if (objDatabase[key].userId === user.uid ) {
+      if (objDatabase[key].userId === user.uid) {
         this.productsArray.push(objDatabase[key]);
       }
     }
     return this.productsArray;
+  }
+
+  removeBreakfast(userFood: UserFood): Observable<void> {
+    return this.http.delete<void>(`${this.url}/breakfast/${userFood.date}/${userFood.foodId}.json`);
+  }
+  removeLunch(userFood: UserFood): Observable<void> {
+    return this.http.delete<void>(`${this.url}/lunch/${userFood.date}/${userFood.foodId}.json`);
+  }
+  removeDinner(userFood: UserFood): Observable<void> {
+    return this.http.delete<void>(`${this.url}/dinner/${userFood.date}/${userFood.foodId}.json`);
+  }
+  removeSnack(userFood: UserFood): Observable<void> {
+    return this.http.delete<void>(`${this.url}/snack/${userFood.date}/${userFood.foodId}.json`);
   }
 }
 

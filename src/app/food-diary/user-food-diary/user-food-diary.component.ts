@@ -5,7 +5,8 @@ import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-d
 import {PostUserFoodService} from '../../services/post-user-food.service';
 import {CheckUserIdService} from '../../services/check-user-id.service';
 import {GetUserFoodService} from '../../services/get-user-food.service';
-import {switchMap} from 'rxjs/operators';
+import {map, switchMap} from 'rxjs/operators';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -16,7 +17,10 @@ import {switchMap} from 'rxjs/operators';
 export class UserFoodDiaryComponent implements OnInit {
   foodType = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
   isOpen = false;
-  loadFood = false;
+  isLoadBreakfast = false;
+  isLoadLunch = false;
+  isLoadDinner = false;
+  isLoadSnack = false;
   productDB: ProductsDB;
   arrOfProd: ProductsDB[] = [];
   searchText = '';
@@ -60,10 +64,18 @@ export class UserFoodDiaryComponent implements OnInit {
     });
   }
 
-  openFood(): void {
-    this.loadFood = !this.loadFood;
+  openFoodBreakfast(): void {
+    this.isLoadBreakfast = !this.isLoadBreakfast;
   }
-
+  openFoodLunch(): void {
+    this.isLoadLunch = !this.isLoadLunch;
+  }
+  openFoodDinner(): void {
+    this.isLoadDinner = !this.isLoadDinner;
+  }
+  openFoodSnack(): void {
+    this.isLoadSnack = !this.isLoadSnack;
+  }
   openSearchBar(): void {
     this.isOpen = !this.isOpen;
   }
@@ -108,38 +120,88 @@ export class UserFoodDiaryComponent implements OnInit {
 
   public async sendUserBreakfast(idx: number): Promise<any> {
     await this.sendUserFood(idx).then((foodObj) => {
-      this.postUserFood.createBreakfast(foodObj).subscribe(() => {
+      this.postUserFood.createBreakfast(foodObj).pipe(map(res => {
+        foodObj.foodId = res.name;
+      })).subscribe( () => {
         console.log('Added');
-        return foodObj;
+        const updates = {};
+        updates[`breakfast/${foodObj.date}/${foodObj.foodId}`] = foodObj;
+        firebase.database().ref().update(updates);
+        this.userProductsBreakfast.push(foodObj);
       });
+      return foodObj;
+  });
+  }
+
+  public async sendUserLunch(idx: number): Promise <any> {
+    await this.sendUserFood(idx).then((foodObj) => {
+      this.postUserFood.createLunch(foodObj).pipe(map(res => {
+        foodObj.foodId = res.name;
+      })).subscribe( () => {
+        console.log('Added');
+        const updates = {};
+        updates[`lunch/${foodObj.date}/${foodObj.foodId}`] = foodObj;
+        firebase.database().ref().update(updates);
+        this.userProductsLunch.push(foodObj);
+      });
+      return foodObj;
     });
   }
 
-  public async sendUserLunch(idx: number): Promise<any> {
+  public async sendUserDinner(idx: number): Promise <any> {
     await this.sendUserFood(idx).then((foodObj) => {
-      this.postUserFood.createLunch(foodObj).subscribe(() => {
+      this.postUserFood.createDinner(foodObj).pipe(map(res => {
+        foodObj.foodId = res.name;
+      })).subscribe( () => {
         console.log('Added');
-        return foodObj;
+        const updates = {};
+        updates[`dinner/${foodObj.date}/${foodObj.foodId}`] = foodObj;
+        firebase.database().ref().update(updates);
+        this.userProductsDinner.push(foodObj);
       });
+      return foodObj;
     });
   }
 
-  public async sendUserDinner(idx: number): Promise<any> {
+  public async sendUserSnack(idx: number): Promise <any> {
     await this.sendUserFood(idx).then((foodObj) => {
-      this.postUserFood.createDinner(foodObj).subscribe(() => {
+      this.postUserFood.createSnack(foodObj).pipe(map(res => {
+        foodObj.foodId = res.name;
+      })).subscribe( () => {
         console.log('Added');
-        return foodObj;
+        const updates = {};
+        updates[`snack/${foodObj.date}/${foodObj.foodId}`] = foodObj;
+        firebase.database().ref().update(updates);
+        this.userProductsSnack.push(foodObj);
       });
+      return foodObj;
     });
   }
-  public async sendUserSnack(idx: number): Promise<any> {
-    await this.sendUserFood(idx).then((foodObj) => {
-      this.postUserFood.createSnack(foodObj).subscribe(() => {
-        console.log('Added');
-        return foodObj;
-      });
-    });
+
+  public removeBreakfast(userFood: UserFood): void {
+    this.getUserFoodFromFirebase.removeBreakfast(userFood).subscribe(() => {
+        this.userProductsBreakfast = this.userProductsBreakfast.filter( t => t.foodId !== userFood.foodId);
+    }, error => console.error(error));
   }
+
+  public removeLunch(userFood: UserFood): void {
+    this.getUserFoodFromFirebase.removeLunch(userFood).subscribe(() => {
+      this.userProductsLunch = this.userProductsLunch.filter( t => t.foodId !== userFood.foodId);
+    }, error => console.error(error));
+  }
+
+  public removeDinner(userFood: UserFood): void {
+    this.getUserFoodFromFirebase.removeDinner(userFood).subscribe(() => {
+      this.userProductsDinner = this.userProductsDinner.filter( t => t.foodId !== userFood.foodId);
+    }, error => console.error(error));
+  }
+
+  public removeSnack(userFood: UserFood): void {
+    this.getUserFoodFromFirebase.removeSnack(userFood).subscribe(() => {
+      this.userProductsSnack = this.userProductsSnack.filter( t => t.foodId !== userFood.foodId);
+    }, error => console.error(error));
+  }
+
   // sendProductToFB() {
   //   const product: ProductsDB = {
   //     name: 'Coffee Cappuccino',
