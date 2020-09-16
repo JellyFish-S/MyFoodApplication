@@ -66,13 +66,9 @@ export class UserFoodDiaryComponent implements OnInit {
       };
       this.userProductsBreakfast.forEach(breakfast => {
         if (breakfast) {
-          this.sumBreakfast.protein += breakfast.protein;
-          this.sumBreakfast.fat += breakfast.fat;
-          this.sumBreakfast.carbohydrate += breakfast.carbohydrate;
-          this.sumBreakfast.calories += breakfast.calories;
+          this.addFoodChangesSum(this.sumBreakfast, breakfast);
           this.isLoadSumBreakfast = true;
           this.sumFoodArray.push(breakfast);
-          this.isLoadSumFood = true;
         }
       });
     });
@@ -88,13 +84,9 @@ export class UserFoodDiaryComponent implements OnInit {
       };
       this.userProductsLunch.forEach(lunch => {
         if (lunch) {
-          this.sumLunch.protein += lunch.protein;
-          this.sumLunch.fat += lunch.fat;
-          this.sumLunch.carbohydrate += lunch.carbohydrate;
-          this.sumLunch.calories += lunch.calories;
+          this.addFoodChangesSum(this.sumLunch, lunch);
           this.isLoadSumLunch = true;
           this.sumFoodArray.push(lunch);
-          this.isLoadSumFood = true;
         }
       });
     });
@@ -110,13 +102,9 @@ export class UserFoodDiaryComponent implements OnInit {
       };
       this.userProductsDinner.forEach(dinner => {
         if (dinner) {
-          this.sumDinner.protein += dinner.protein;
-          this.sumDinner.fat += dinner.fat;
-          this.sumDinner.carbohydrate += dinner.carbohydrate;
-          this.sumDinner.calories += dinner.calories;
+          this.addFoodChangesSum(this.sumDinner, dinner);
           this.isLoadSumDinner = true;
           this.sumFoodArray.push(dinner);
-          this.isLoadSumFood = true;
         }
       });
     });
@@ -132,16 +120,11 @@ export class UserFoodDiaryComponent implements OnInit {
       };
       this.userProductsSnack.forEach(snack => {
         if (snack) {
-          this.sumSnack.protein += snack.protein;
-          this.sumSnack.fat += snack.fat;
-          this.sumSnack.carbohydrate += snack.carbohydrate;
-          this.sumSnack.calories += snack.calories;
+          this.addFoodChangesSum(this.sumSnack, snack);
           this.isLoadSumSnack = true;
           this.sumFoodArray.push(snack);
-          this.isLoadSumFood = true;
         }
       });
-      console.log(this.sumFoodArray);
       this.sumFood = {
          protein: 0,
          fat: 0,
@@ -149,15 +132,14 @@ export class UserFoodDiaryComponent implements OnInit {
          calories: 0
        };
       this.sumFoodArray.forEach(product => {
-           this.sumFood.protein += product.protein;
-           this.sumFood.fat += product.fat;
-           this.sumFood.carbohydrate += product.carbohydrate;
-           this.sumFood.calories += product.calories;
+        this.addFoodChangesSum(this.sumFood, product);
+        this.isLoadSumFood = true;
          }
        );
-      console.log(this.sumFood);
     });
-
+  }
+  foodWasAdd(): void {
+    alert('Product added');
   }
 
   openFoodBreakfast(): void {
@@ -242,8 +224,6 @@ export class UserFoodDiaryComponent implements OnInit {
       return foodObj;
   });
   }
-
-
 
   public async sendUserLunch(idx: number): Promise <any> {
     await this.sendUserFood(idx).then((foodObj) => {
