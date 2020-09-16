@@ -71,3 +71,10 @@ export interface UserFood {
   userId?: string;
   foodId?: string;
 }
+
+export interface SumNumbersFoodDiary {
+  protein: number;
+  fat: number;
+  carbohydrate: number;
+  calories: number;
+}
