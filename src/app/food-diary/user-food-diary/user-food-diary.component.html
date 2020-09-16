@@ -46,24 +46,28 @@
   <table>
 
     <thead class="table-header">
-    <tr>
+    <tr
+      *ngIf="isLoadSumFood"
+    >
       <th class="total">Total</th>
-      <th>protein <br> <span>65.5</span></th>
-      <th>fat <br> <span>38.6</span></th>
-      <th>carbohydrate <br> <span>110.1</span></th>
-      <th>calories <br> <span>1200</span></th>
+      <th>protein <br> <span>{{sumFood.protein | number: '1.1-1'}}</span></th>
+      <th>fat <br> <span>{{sumFood.fat | number: '1.1-1'}}</span></th>
+      <th>carbohydrate <br> <span>{{sumFood.carbohydrate | number: '1.1-1'}}</span></th>
+      <th>calories <br> <span>{{sumFood.calories}}</span></th>
       <th></th>
       <th class="data">{{dateService.date | async | moment: 'DD.MM.YYYY'}}</th>
     </tr>
     </thead>
 
     <tr
-      class="food">
+      class="food"
+      *ngIf="isLoadSumBreakfast"
+    >
       <td class="eating-name">{{foodType[0]}}</td>
-      <td>21.1</td>
-      <td>12.6</td>
-      <td>45.5</td>
-      <td>425</td>
+      <td>{{sumBreakfast.protein | number: '1.1-1'}}</td>
+      <td>{{sumBreakfast.fat | number: '1.1-1'}}</td>
+      <td>{{sumBreakfast.carbohydrate | number: '1.1-1'}}</td>
+      <td>{{sumBreakfast.calories | number: '1.0-0'}}</td>
       <td class="add-food" (click)="openSearchBar(); idx = 0"><i class="fa fa-plus"></i></td>
       <td class="open-products"  (click)="openFoodBreakfast()">
         <i class="fa fa-chevron-down" *ngIf="!isLoadBreakfast"></i>
@@ -79,18 +83,20 @@
         <td>{{product.fat}}</td>
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
-        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td>{{product.weight}} gr</td>
         <td class="delete" (click)="removeBreakfast(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 
 
-    <tr class="food">
+    <tr class="food"
+        *ngIf="isLoadSumLunch"
+    >
       <td class="eating-name">{{foodType[1]}}</td>
-      <td>21.1</td>
-      <td>12.6</td>
-      <td>45.5</td>
-      <td>425</td>
+      <td>{{sumLunch.protein | number: '1.1-1'}}</td>
+      <td>{{sumLunch.fat | number: '1.1-1'}}</td>
+      <td>{{sumLunch.carbohydrate | number: '1.1-1'}}</td>
+      <td>{{sumLunch.calories | number: '1.0-0'}}</td>
       <td class="add-food" (click)="openSearchBar(); idx = 1" ><i class="fa fa-plus"></i></td>
       <td class="open-products"  (click)="openFoodLunch()">
         <i class="fa fa-chevron-down" *ngIf="!isLoadLunch"></i>
@@ -107,17 +113,19 @@
         <td>{{product.fat}}</td>
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
-        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td>{{product.weight}} gr</td>
         <td class="delete" (click)="removeLunch(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 
-    <tr class="food">
+    <tr class="food"
+        *ngIf="isLoadSumDinner"
+    >
       <td class="eating-name">{{foodType[2]}}</td>
-      <td>21.1</td>
-      <td>12.6</td>
-      <td>45.5</td>
-      <td>425</td>
+      <td>{{sumDinner.protein | number: '1.1-1'}}</td>
+      <td>{{sumDinner.fat | number: '1.1-1'}}</td>
+      <td>{{sumDinner.carbohydrate | number: '1.1-1'}}</td>
+      <td>{{sumDinner.calories | number: '1.0-0'}}</td>
       <td class="add-food" (click)="openSearchBar(); idx = 2"><i class="fa fa-plus"></i></td>
       <td class="open-products"  (click)="openFoodDinner()">
         <i class="fa fa-chevron-down" *ngIf="!isLoadDinner"></i>
@@ -133,17 +141,19 @@
         <td>{{product.fat}}</td>
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
-        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td>{{product.weight}} gr</td>
         <td class="delete" (click)="removeDinner(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 
-    <tr class="food">
+    <tr class="food"
+        *ngIf="isLoadSumSnack"
+    >
       <td class="eating-name">{{foodType[3]}}</td>
-      <td>21.1</td>
-      <td>12.6</td>
-      <td>45.5</td>
-      <td>425</td>
+      <td>{{sumSnack.protein | number: '1.1-1'}}</td>
+      <td>{{sumSnack.fat | number: '1.1-1'}}</td>
+      <td>{{sumSnack.carbohydrate | number: '1.1-1'}}</td>
+      <td>{{sumSnack.calories | number: '1.0-0'}}</td>
       <td class="add-food" (click)="openSearchBar(); idx = 3"><i class="fa fa-plus"></i></td>
       <td class="open-products"  (click)="openFoodSnack()">
         <i class="fa fa-chevron-down" *ngIf="!isLoadSnack"></i>
@@ -159,7 +169,7 @@
         <td>{{product.fat}}</td>
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
-        <td><input type="number" [(ngModel)]="product.weight"> gr </td>
+        <td>{{product.weight}} gr</td>
         <td class="delete" (click)="removeSnack(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
