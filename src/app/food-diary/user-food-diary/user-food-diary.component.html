@@ -65,12 +65,12 @@
       <td>45.5</td>
       <td>425</td>
       <td class="add-food" (click)="openSearchBar(); idx = 0"><i class="fa fa-plus"></i></td>
-      <td class="open-products"  (click)="openFood()">
-        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
-        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      <td class="open-products"  (click)="openFoodBreakfast()">
+        <i class="fa fa-chevron-down" *ngIf="!isLoadBreakfast"></i>
+        <i class="fa fa-chevron-up" *ngIf="isLoadBreakfast"></i>
       </td>
     </tr>
-    <tbody *ngIf="loadFood">
+    <tbody *ngIf="isLoadBreakfast">
       <tr class="products"
           *ngFor="let product of userProductsBreakfast; let i = index"
       >
@@ -80,7 +80,7 @@
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
         <td><input type="number" [(ngModel)]="product.weight"> gr </td>
-        <td class="delete"><i class="fa fa-minus"></i></td>
+        <td class="delete" (click)="removeBreakfast(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 
@@ -92,13 +92,13 @@
       <td>45.5</td>
       <td>425</td>
       <td class="add-food" (click)="openSearchBar(); idx = 1" ><i class="fa fa-plus"></i></td>
-      <td class="open-products"  (click)="openFood()">
-        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
-        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      <td class="open-products"  (click)="openFoodLunch()">
+        <i class="fa fa-chevron-down" *ngIf="!isLoadLunch"></i>
+        <i class="fa fa-chevron-up" *ngIf="isLoadLunch"></i>
       </td>
     </tr>
 
-    <tbody *ngIf="loadFood">
+    <tbody *ngIf="isLoadLunch">
       <tr class="products"
           *ngFor="let product of userProductsLunch; let i = index"
       >
@@ -108,7 +108,7 @@
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
         <td><input type="number" [(ngModel)]="product.weight"> gr </td>
-        <td class="delete"><i class="fa fa-minus"></i></td>
+        <td class="delete" (click)="removeLunch(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 
@@ -119,12 +119,12 @@
       <td>45.5</td>
       <td>425</td>
       <td class="add-food" (click)="openSearchBar(); idx = 2"><i class="fa fa-plus"></i></td>
-      <td class="open-products"  (click)="openFood()">
-        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
-        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      <td class="open-products"  (click)="openFoodDinner()">
+        <i class="fa fa-chevron-down" *ngIf="!isLoadDinner"></i>
+        <i class="fa fa-chevron-up" *ngIf="isLoadDinner"></i>
       </td>
     </tr>
-    <tbody *ngIf="loadFood">
+    <tbody *ngIf="isLoadDinner">
       <tr class="products"
           *ngFor="let product of userProductsDinner; let i = index"
       >
@@ -134,7 +134,7 @@
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
         <td><input type="number" [(ngModel)]="product.weight"> gr </td>
-        <td class="delete"><i class="fa fa-minus"></i></td>
+        <td class="delete" (click)="removeDinner(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 
@@ -145,12 +145,12 @@
       <td>45.5</td>
       <td>425</td>
       <td class="add-food" (click)="openSearchBar(); idx = 3"><i class="fa fa-plus"></i></td>
-      <td class="open-products"  (click)="openFood()">
-        <i class="fa fa-chevron-down" *ngIf="!loadFood"></i>
-        <i class="fa fa-chevron-up" *ngIf="loadFood"></i>
+      <td class="open-products"  (click)="openFoodSnack()">
+        <i class="fa fa-chevron-down" *ngIf="!isLoadSnack"></i>
+        <i class="fa fa-chevron-up" *ngIf="isLoadSnack"></i>
       </td>
     </tr>
-    <tbody *ngIf="loadFood">
+    <tbody *ngIf="isLoadSnack">
       <tr class="products"
           *ngFor="let product of userProductsSnack; let i = index"
       >
@@ -160,7 +160,7 @@
         <td>{{product.carbohydrate}}</td>
         <td>{{product.calories}}</td>
         <td><input type="number" [(ngModel)]="product.weight"> gr </td>
-        <td class="delete"><i class="fa fa-minus"></i></td>
+        <td class="delete" (click)="removeSnack(product)"><i class="fa fa-minus"></i></td>
       </tr>
     </tbody>
 

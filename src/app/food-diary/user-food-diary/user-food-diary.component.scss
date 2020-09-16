@@ -112,6 +112,7 @@
     text-align: left;
   }
   .delete {
+    cursor: pointer;
     i {
       border-radius: 50%;
       background: var(--accent-color);

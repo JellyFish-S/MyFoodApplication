@@ -69,4 +69,5 @@ export interface UserFood {
   weight: number;
   date: string;
   userId?: string;
+  foodId?: string;
 }
