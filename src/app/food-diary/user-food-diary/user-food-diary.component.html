@@ -34,10 +34,10 @@
               <td>{{arrOfProd[i].carbohydrate}}</td>
               <td>{{arrOfProd[i].calories}}</td>
               <td><input type="number" [(ngModel)]="arrOfProd[i].weight" (change)="changeWeight(arrOfProd[i].weight, i)">  gr</td>
-              <td class="add-food" *ngIf="idx === 0" (click)="sendUserBreakfast(i)"><i class="fa fa-plus"></i></td>
-              <td class="add-food" *ngIf="idx === 1" (click)="sendUserLunch(i)"><i class="fa fa-plus"></i></td>
-              <td class="add-food" *ngIf="idx === 2" (click)="sendUserDinner(i)"><i class="fa fa-plus"></i></td>
-              <td class="add-food" *ngIf="idx === 3" (click)="sendUserSnack(i)"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 0" (click)="sendUserBreakfast(i);openSearchBar();foodWasAdd()"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 1" (click)="sendUserLunch(i);openSearchBar();foodWasAdd()"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 2" (click)="sendUserDinner(i);openSearchBar();foodWasAdd()"><i class="fa fa-plus"></i></td>
+              <td class="add-food" *ngIf="idx === 3" (click)="sendUserSnack(i);openSearchBar();foodWasAdd()"><i class="fa fa-plus"></i></td>
           </tr>
           </tbody>
         </table>
@@ -74,7 +74,11 @@
         <i class="fa fa-chevron-up" *ngIf="isLoadBreakfast"></i>
       </td>
     </tr>
+
+
+
     <tbody *ngIf="isLoadBreakfast">
+      <tr class="no-food" *ngIf="userProductsBreakfast.length === 0"><p>No food added</p></tr>
       <tr class="products"
           *ngFor="let product of userProductsBreakfast; let i = index"
       >
@@ -105,6 +109,7 @@
     </tr>
 
     <tbody *ngIf="isLoadLunch">
+      <tr class="no-food" *ngIf="userProductsLunch.length === 0"><p>No food added</p></tr>
       <tr class="products"
           *ngFor="let product of userProductsLunch; let i = index"
       >
@@ -133,6 +138,7 @@
       </td>
     </tr>
     <tbody *ngIf="isLoadDinner">
+      <tr class="no-food" *ngIf="userProductsDinner.length === 0"><p>No food added</p></tr>
       <tr class="products"
           *ngFor="let product of userProductsDinner; let i = index"
       >
@@ -161,6 +167,7 @@
       </td>
     </tr>
     <tbody *ngIf="isLoadSnack">
+    <tr class="no-food" *ngIf="userProductsSnack.length === 0"><p>No food added</p></tr>
       <tr class="products"
           *ngFor="let product of userProductsSnack; let i = index"
       >
