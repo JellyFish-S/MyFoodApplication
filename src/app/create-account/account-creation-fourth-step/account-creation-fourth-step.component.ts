@@ -6,6 +6,7 @@ import {ContactInfo, FirebaseUserInterface} from '../../interfaces';
 import {RegistrationService} from '../../services/registration.service';
 import UserCredential = firebase.auth.UserCredential;
 import {PostUserInformationService} from '../../services/post-user-information.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'mf-account-creation-fourth-step',
@@ -51,14 +52,17 @@ export class AccountCreationFourthStepComponent implements OnInit {
     this.onTheNextStep.emit(true);
     try {
       const auth: UserCredential = await this.registrationService.register(contactInfo.email, contactInfo.password);
-      const userId = this.accountService.getUserId(auth.user.uid);
+      this.accountService.getUserId(auth.user.uid);
       this.submitted = false;
       this.errorForm = false;
       const userParamsAndGoal: FirebaseUserInterface = this.accountService.getUserParamsFirebase();
-      console.log(userParamsAndGoal);
-      // this.postUserInformation.create(userParamsAndGoal);
-      this.postUserInformation.create(userParamsAndGoal).subscribe(() => {
-        this.form.reset();
+      this.postUserInformation.create(userParamsAndGoal)
+        .subscribe((res) => {
+          userParamsAndGoal.userDbId = res.name;
+          const updates = {};
+          updates[`users/${userParamsAndGoal.userDbId}`] = userParamsAndGoal;
+          firebase.database().ref().update(updates);
+          this.form.reset();
       });
       alert('Registration successful');
     } catch (error) {

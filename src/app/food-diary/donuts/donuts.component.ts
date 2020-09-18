@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'mf-donuts',
   templateUrl: './donuts.component.html',
@@ -9,7 +10,7 @@ export class DonutsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<any> {
   }
 
 }

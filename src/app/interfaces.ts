@@ -38,6 +38,7 @@ export interface FirebaseUserInterface {
   caloriesGoal: number;
   username: string;
   userId?: string;
+  userDbId?: string;
 }
 
 export interface Day {
@@ -77,4 +78,8 @@ export interface SumNumbersFoodDiary {
   fat: number;
   carbohydrate: number;
   calories: number;
+}
+
+export interface ResponseName {
+  name: string;
 }
