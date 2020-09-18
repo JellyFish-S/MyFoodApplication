@@ -67,10 +67,10 @@ export class UserFoodDiaryComponent implements OnInit {
       this.userProductsBreakfast.forEach(breakfast => {
         if (breakfast) {
           this.addFoodChangesSum(this.sumBreakfast, breakfast);
-          this.isLoadSumBreakfast = true;
           this.sumFoodArray.push(breakfast);
         }
       });
+      this.isLoadSumBreakfast = true;
     });
      this.dateService.date.pipe(
       switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseLunch(value))
@@ -85,10 +85,10 @@ export class UserFoodDiaryComponent implements OnInit {
       this.userProductsLunch.forEach(lunch => {
         if (lunch) {
           this.addFoodChangesSum(this.sumLunch, lunch);
-          this.isLoadSumLunch = true;
           this.sumFoodArray.push(lunch);
         }
       });
+      this.isLoadSumLunch = true;
     });
      this.dateService.date.pipe(
       switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseDinner(value))
@@ -103,10 +103,10 @@ export class UserFoodDiaryComponent implements OnInit {
       this.userProductsDinner.forEach(dinner => {
         if (dinner) {
           this.addFoodChangesSum(this.sumDinner, dinner);
-          this.isLoadSumDinner = true;
           this.sumFoodArray.push(dinner);
         }
       });
+      this.isLoadSumDinner = true;
     });
      this.dateService.date.pipe(
       switchMap(value => this.getUserFoodFromFirebase.GetUserFoodFromFirebaseSnack(value))
@@ -121,10 +121,10 @@ export class UserFoodDiaryComponent implements OnInit {
       this.userProductsSnack.forEach(snack => {
         if (snack) {
           this.addFoodChangesSum(this.sumSnack, snack);
-          this.isLoadSumSnack = true;
           this.sumFoodArray.push(snack);
         }
       });
+      this.isLoadSumSnack = true;
       this.sumFood = {
          protein: 0,
          fat: 0,
@@ -133,9 +133,9 @@ export class UserFoodDiaryComponent implements OnInit {
        };
       this.sumFoodArray.forEach(product => {
         this.addFoodChangesSum(this.sumFood, product);
-        this.isLoadSumFood = true;
          }
        );
+      this.isLoadSumFood = true;
     });
   }
   foodWasAdd(): void {

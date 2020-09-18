@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ComparePassword} from '../../validators/confirm-password.validator';
 import {AccountService} from '../../services/account.service';
-import {ContactInfo, FirebaseUserInterface} from '../../interfaces';
+import {ContactInfo, FirebaseUserInterface, UserWeight} from '../../interfaces';
 import {RegistrationService} from '../../services/registration.service';
 import UserCredential = firebase.auth.UserCredential;
 import {PostUserInformationService} from '../../services/post-user-information.service';
@@ -20,6 +20,12 @@ export class AccountCreationFourthStepComponent implements OnInit {
   form: FormGroup;
   submitted = false;
   errorForm: boolean;
+  public userWeight: UserWeight = {
+    weight: null,
+    userId: null,
+    userDbId: null,
+    date: null
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -62,6 +68,8 @@ export class AccountCreationFourthStepComponent implements OnInit {
           const updates = {};
           updates[`users/${userParamsAndGoal.userDbId}`] = userParamsAndGoal;
           firebase.database().ref().update(updates);
+          this.userWeight = this.accountService.getStartedWeight(userParamsAndGoal.userId, userParamsAndGoal.userDbId);
+          this.postUserInformation.postNewWeight(this.userWeight).subscribe();
           this.form.reset();
       });
       alert('Registration successful');
@@ -70,6 +78,6 @@ export class AccountCreationFourthStepComponent implements OnInit {
       this.submitted = false;
       alert('Invalid information. Please check it');
     }
-
   }
+
 }

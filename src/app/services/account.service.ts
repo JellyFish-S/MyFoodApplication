@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ContactInfo, FirebaseUserInterface, NewAccount, UserParams} from '../interfaces';
+import {ContactInfo, FirebaseUserInterface, NewAccount, UserParams, UserWeight} from '../interfaces';
+import * as firebase from 'firebase';
 
 @Injectable()
 export class AccountService {
@@ -66,4 +67,14 @@ export class AccountService {
       username: this.account.username
     };
   }
+
+  public getStartedWeight(userId: string, userDbId: string): UserWeight {
+    return {
+      weight: this.account.userParams.weight,
+      userId,
+      date: new Date(firebase.auth().currentUser.metadata.creationTime).toLocaleDateString('ru-Ru'),
+      userDbId
+    };
+  }
+
 }
