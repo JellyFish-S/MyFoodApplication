@@ -81,7 +81,8 @@ firebase.initializeApp(firebaseConfig);
     PostUserInformationService,
     CheckUserIdService,
     AngularFireDatabase,
-    AngularFireAuth],
+    AngularFireAuth
+  ],
 
   bootstrap: [AppComponent]
 })

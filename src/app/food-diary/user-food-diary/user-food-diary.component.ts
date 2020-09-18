@@ -229,6 +229,7 @@ export class UserFoodDiaryComponent implements OnInit {
     await this.sendUserFood(idx).then((foodObj) => {
       this.postUserFood.createLunch(foodObj).pipe(map(res => {
         foodObj.foodId = res.name;
+
       })).subscribe( () => {
         console.log('Added');
         const updates = {};
