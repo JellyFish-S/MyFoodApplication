@@ -6,9 +6,20 @@
   <div class="add-info-block">
     <div class="weight-info">
       <p>Current weight</p>
-      <small>19.08.2020</small>
-      <p class="current-number">{{userInformation.weight}} kg</p>
-      <i class="fa fa-plus"></i>
+      <small>{{userWeight.date}}</small>
+      <p class="current-number">{{weight}} kg</p>
+      <i class="fa fa-plus"
+         (click)="openChangeCurrentWeight()"
+      ></i>
+      <div class="input-weight-goal"
+           *ngIf="isOpenChangeWeight"
+      >
+        <div class="change">
+          <input type="number" [(ngModel)]="weight">
+          <i class="fa fa-times" (click)="openChangeCurrentWeight()"></i>
+        </div>
+        <button (click)="sendNewUserWeight();openChangeCurrentWeight()">Change</button>
+      </div>
     </div>
     <div class="calorie-info">
       <p>Current calorie <br> goal</p>

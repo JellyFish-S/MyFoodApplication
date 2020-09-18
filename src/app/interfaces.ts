@@ -83,3 +83,10 @@ export interface SumNumbersFoodDiary {
 export interface ResponseName {
   name: string;
 }
+
+export interface UserWeight {
+  weight: number;
+  userId?: string;
+  userDbId?: string;
+  date?: string;
+}
