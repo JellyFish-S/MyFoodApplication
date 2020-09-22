@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ContactInfo, FirebaseUserInterface, NewAccount, UserParams, UserWeight} from '../interfaces';
+import {ContactInfo, FirebaseUserInterface, NewAccount, SumNumbersFoodDiary, UserParams, UserWeight} from '../interfaces';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -16,6 +16,13 @@ export class AccountService {
     caloriesGoal: null,
     username: null,
     userId: null
+  };
+
+  private dailySum: SumNumbersFoodDiary = {
+    protein: null,
+    fat: null,
+    carbohydrate: null,
+    calories: null
   };
 
   private contactInfo: ContactInfo = {
@@ -68,13 +75,21 @@ export class AccountService {
     };
   }
 
-  public getStartedWeight(userId: string, userDbId: string): UserWeight {
+  public getStartedWeight(userId: string, userDbId: string, weightDBID: string): UserWeight {
     return {
       weight: this.account.userParams.weight,
       userId,
       date: new Date(firebase.auth().currentUser.metadata.creationTime).toLocaleDateString('ru-Ru'),
-      userDbId
+      userDbId,
+      weightDBID
     };
   }
 
+  public sumCalories(calories: number): void {
+    this.dailySum.calories = calories;
+    }
+
+  public dailyCalories(sumCalories): number {
+    return  sumCalories = this.dailySum.calories;
+  }
 }

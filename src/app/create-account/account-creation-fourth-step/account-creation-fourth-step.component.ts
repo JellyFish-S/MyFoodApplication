@@ -24,7 +24,8 @@ export class AccountCreationFourthStepComponent implements OnInit {
     weight: null,
     userId: null,
     userDbId: null,
-    date: null
+    date: null,
+    weightDBID: null
   };
 
   constructor(
@@ -68,8 +69,16 @@ export class AccountCreationFourthStepComponent implements OnInit {
           const updates = {};
           updates[`users/${userParamsAndGoal.userDbId}`] = userParamsAndGoal;
           firebase.database().ref().update(updates);
-          this.userWeight = this.accountService.getStartedWeight(userParamsAndGoal.userId, userParamsAndGoal.userDbId);
-          this.postUserInformation.postNewWeight(this.userWeight).subscribe();
+          this.postUserInformation.postNewWeight(this.userWeight).subscribe((weight) => {
+            this.userWeight.weightDBID = weight.name;
+            this.userWeight = this.accountService
+              .getStartedWeight(userParamsAndGoal.userId, userParamsAndGoal.userDbId, this.userWeight.weightDBID);
+            console.log(this.userWeight);
+            const updatesWeight = {};
+            updatesWeight[`weight/${weight.name}`] = this.userWeight;
+            firebase.database().ref().update(updatesWeight);
+
+          });
           this.form.reset();
       });
       alert('Registration successful');

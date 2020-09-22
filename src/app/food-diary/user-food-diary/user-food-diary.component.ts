@@ -7,6 +7,7 @@ import {CheckUserIdService} from '../../services/check-user-id.service';
 import {GetUserFoodService} from '../../services/get-user-food.service';
 import {map, switchMap} from 'rxjs/operators';
 import * as firebase from 'firebase';
+import {AccountService} from '../../services/account.service';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class UserFoodDiaryComponent implements OnInit {
     public addProductToFoodDiaryService: AddProductToFoodDiaryService,
     public postUserFood: PostUserFoodService,
     public checkUserIdService: CheckUserIdService,
-    public getUserFoodFromFirebase: GetUserFoodService
+    public getUserFoodFromFirebase: GetUserFoodService,
+    public accountService: AccountService
   ) {
   }
 
@@ -136,6 +138,7 @@ export class UserFoodDiaryComponent implements OnInit {
          }
        );
       this.isLoadSumFood = true;
+      this.accountService.sumCalories(this.sumFood.calories);
     });
   }
   foodWasAdd(): void {

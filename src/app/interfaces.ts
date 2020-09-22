@@ -89,4 +89,5 @@ export interface UserWeight {
   userId?: string;
   userDbId?: string;
   date?: string;
+  weightDBID?: string;
 }
