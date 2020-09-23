@@ -15,8 +15,11 @@ import {DateService} from '../../services/date.service';
 export class DonutsComponent implements OnInit {
   private sumCalories: number;
   public caloriesLeft: number;
+  public kgLeft: number;
+  private kgNow: number;
   private userInformation: FirebaseUserInterface;
   subscription: Subscription;
+  subscriptionWeight: Subscription;
   constructor(
     private accountService: AccountService,
     private checkUserIdService: CheckUserIdService,
@@ -39,6 +42,13 @@ export class DonutsComponent implements OnInit {
         });
       });
     });
-
+    this.kgNow = this.accountService.sendWeightNow(this.kgNow);
+    this.kgLeft = this.userInformation.goalWeight - this.kgNow;
+    this.subscriptionWeight = this.accountService.weightSubject.subscribe(message => {
+      this.kgLeft = 0;
+      this.kgNow = message;
+      console.log(message, this.userInformation.goalWeight);
+      this.kgLeft = this.userInformation.goalWeight - this.kgNow;
+    });
     }
 }

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CheckUserIdService} from '../../services/check-user-id.service';
 import {FirebaseUserInterface, UserWeight} from '../../interfaces';
 import * as firebase from 'firebase';
-import * as moment from 'moment';
 import {DateService} from '../../services/date.service';
 import {AccountService} from '../../services/account.service';
 import {PostUserInformationService} from '../../services/post-user-information.service';
@@ -47,8 +46,12 @@ export class LeftbarDiaryComponent implements OnInit {
         this.weight = this.userWeight.weight;
         this.date = this.userWeight.date;
       });
+      console.log(this.weight);
       this.isLoaded = true;
+      this.accountService.weightSubject.next(this.weight);
+      this.accountService.getWeightNow(this.weight);
     });
+    console.log(this.weight);
   }
 
   openCalorieGoal(): void {
@@ -76,7 +79,6 @@ export class LeftbarDiaryComponent implements OnInit {
     for (const key in objDatabase) {
       if (objDatabase[key].userId === user.uid) {
         objArr.push(objDatabase[key]);
-        // console.log(objArr);
       }
     }
     return objArr;
@@ -111,6 +113,8 @@ export class LeftbarDiaryComponent implements OnInit {
             this.date = this.userWeight.date;
           });
         }
+      this.accountService.weightSubject.next(this.weight);
+      this.accountService.getWeightNow(this.weight);
 
   }
 }
