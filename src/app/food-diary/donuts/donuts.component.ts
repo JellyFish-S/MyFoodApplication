@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AccountService} from '../../services/account.service';
 import {FirebaseUserInterface} from '../../interfaces';
 import {CheckUserIdService} from '../../services/check-user-id.service';
+import {Subscription} from 'rxjs';
+import {DateService} from '../../services/date.service';
 
 
 
@@ -14,18 +16,29 @@ export class DonutsComponent implements OnInit {
   private sumCalories: number;
   public caloriesLeft: number;
   private userInformation: FirebaseUserInterface;
+  subscription: Subscription;
   constructor(
     private accountService: AccountService,
-    private checkUserIdService: CheckUserIdService
-  ) { }
+    private checkUserIdService: CheckUserIdService,
+    private  dateService: DateService,
+  ) {}
 
-  ngOnInit(): void{
 
-  }
-
-  async calculateSunCalories(): Promise<void> {
-    this.sumCalories = this.accountService.dailyCalories(this.sumCalories);
+  async ngOnInit(): Promise<void> {
+    this.caloriesLeft = 0;
     this.userInformation = await this.checkUserIdService.getUserInformationFromFirebase();
-    this.caloriesLeft = this.userInformation.caloriesGoal - this.sumCalories;
-  }
+    this.dateService.date.pipe().subscribe(() => {
+      this.caloriesLeft = 0;
+      this.sumCalories = this.accountService.dailyCalories(this.sumCalories);
+      this.caloriesLeft = this.userInformation.caloriesGoal - this.sumCalories;
+      this.dateService.date.pipe().subscribe(() => {
+        this.subscription = this.accountService.subject.subscribe(message => {
+          this.caloriesLeft = 0;
+          this.sumCalories = message;
+          this.caloriesLeft = this.userInformation.caloriesGoal - this.sumCalories;
+        });
+      });
+    });
+
+    }
 }

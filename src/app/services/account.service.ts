@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ContactInfo, FirebaseUserInterface, NewAccount, SumNumbersFoodDiary, UserParams, UserWeight} from '../interfaces';
 import * as firebase from 'firebase';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class AccountService {
@@ -30,6 +31,8 @@ export class AccountService {
   email: null,
   password: null
   };
+
+  public subject = new Subject<any>();
 
   public getUserId(userId: string): void {
     this.account.userId = userId;
