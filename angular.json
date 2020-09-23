@@ -145,6 +145,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MyFoodApplication"
+    }
+  },
+  "defaultProject": "MyFoodApplication",
+  "cli": {
+    "analytics": "3f5f9557-6f04-4894-8f90-cd5daa92812c"
+  }
 }

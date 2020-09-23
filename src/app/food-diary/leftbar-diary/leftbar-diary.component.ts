@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CheckUserIdService} from '../../services/check-user-id.service';
 import {FirebaseUserInterface, UserWeight} from '../../interfaces';
 import * as firebase from 'firebase';
+import * as moment from 'moment';
 import {DateService} from '../../services/date.service';
 import {AccountService} from '../../services/account.service';
 import {PostUserInformationService} from '../../services/post-user-information.service';
@@ -14,17 +15,20 @@ import {PostUserInformationService} from '../../services/post-user-information.s
 })
 export class LeftbarDiaryComponent implements OnInit {
   userInformation: FirebaseUserInterface;
+  private identicalSum: number;
   public isLoaded = false;
   public newCalorieGoal: number;
   public isOpenCalorieGoal = false;
   public isOpenChangeWeight = false;
   public userWeightArr: UserWeight[] = [];
   public weight: number;
+  public date: string;
   public userWeight: UserWeight = {
     weight: null,
     userId: null,
     userDbId: null,
-    date: null
+    date: null,
+    weightDBID: null
   };
 
   constructor(
@@ -41,7 +45,7 @@ export class LeftbarDiaryComponent implements OnInit {
         this.userWeightArr.push(el);
         this.userWeight = el;
         this.weight = this.userWeight.weight;
-        console.log(this.userWeight);
+        this.date = this.userWeight.date;
       });
       this.isLoaded = true;
     });
@@ -61,7 +65,6 @@ export class LeftbarDiaryComponent implements OnInit {
       updates[`users/${objDatabase.userDbId}`] = objDatabase;
       firebase.database().ref().update(updates);
       this.userInformation.caloriesGoal = this.newCalorieGoal;
-
     });
   }
 
@@ -73,31 +76,41 @@ export class LeftbarDiaryComponent implements OnInit {
     for (const key in objDatabase) {
       if (objDatabase[key].userId === user.uid) {
         objArr.push(objDatabase[key]);
-        console.log(objArr);
+        // console.log(objArr);
       }
     }
     return objArr;
   }
 
   sendNewUserWeight(): void {
-    // this.userWeight = {
-    //   weight: null,
-    //   userId: null,
-    //   userDbId: null,
-    //   date: null
-    // };
       this.userWeight = {
         userId: this.userWeight.userId,
         userDbId: this.userWeight.userDbId,
         weight: this.weight,
-        date: this.dateService.date.value.format('DD.MM.YYYY')
+        date: this.dateService.date.value.format('DD.MM.YYYY'),
+        weightDBID: this.userWeight.weightDBID
       };
-      console.log(this.userWeight, this.userWeightArr);
-      this.postUserInformationService.postNewWeight(this.userWeight).subscribe(() => {
-        this.userWeightArr.push(this.userWeight);
-      });
-      this.userWeight = this.userWeightArr[this.userWeightArr.length - 1];
-      console.log(this.userWeight, this.userWeightArr);
+      this.identicalSum = 0;
+      this.userWeightArr.forEach((el) => {
+        if (this.userWeight.date === el.date) {
+          this.identicalSum++;
+          const updates = {};
+          updates[`weight/${el.weightDBID}`] = this.userWeight;
+          firebase.database().ref().update(updates);
+        }
+        });
+      if (this.identicalSum === 0) {
+          this.postUserInformationService.postNewWeight(this.userWeight).subscribe((weight) => {
+            this.userWeight.weightDBID = weight.name;
+            console.log(this.userWeight);
+            const updatesWeight = {};
+            updatesWeight[`weight/${weight.name}`] = this.userWeight;
+            firebase.database().ref().update(updatesWeight);
+            this.userWeightArr.push(this.userWeight);
+            this.userWeight = this.userWeightArr[this.userWeightArr.length - 1];
+            this.date = this.userWeight.date;
+          });
+        }
 
   }
 }

@@ -7,6 +7,8 @@ import {CheckUserIdService} from '../../services/check-user-id.service';
 import {GetUserFoodService} from '../../services/get-user-food.service';
 import {map, switchMap} from 'rxjs/operators';
 import * as firebase from 'firebase';
+import {AccountService} from '../../services/account.service';
+
 
 
 @Component({
@@ -43,12 +45,14 @@ export class UserFoodDiaryComponent implements OnInit {
   isLoadSumFood = false;
   sumFood: SumNumbersFoodDiary;
 
+
   constructor(
     public  dateService: DateService,
     public addProductToFoodDiaryService: AddProductToFoodDiaryService,
     public postUserFood: PostUserFoodService,
     public checkUserIdService: CheckUserIdService,
-    public getUserFoodFromFirebase: GetUserFoodService
+    public getUserFoodFromFirebase: GetUserFoodService,
+    public accountService: AccountService
   ) {
   }
 
@@ -136,10 +140,17 @@ export class UserFoodDiaryComponent implements OnInit {
          }
        );
       this.isLoadSumFood = true;
+      this.accountService.subject.next(this.sumFood.calories);
+      this.accountService.sumCalories(this.sumFood.calories);
     });
   }
   foodWasAdd(): void {
     alert('Product added');
+    setTimeout(() => {
+      this.accountService.subject.next(this.sumFood.calories);
+      this.accountService.sumCalories(this.sumFood.calories);
+    }, 500);
+
   }
 
   openFoodBreakfast(): void {
@@ -282,6 +293,7 @@ export class UserFoodDiaryComponent implements OnInit {
         this.addFoodChangesSubtract(this.sumBreakfast, userFood);
         this.addFoodChangesSubtract(this.sumFood, userFood);
         this.userProductsBreakfast = this.userProductsBreakfast.filter( t => t.foodId !== userFood.foodId);
+        this.accountService.subject.next(this.sumFood.calories);
     }, error => console.error(error));
   }
 
@@ -290,6 +302,7 @@ export class UserFoodDiaryComponent implements OnInit {
       this.addFoodChangesSubtract(this.sumLunch, userFood);
       this.addFoodChangesSubtract(this.sumFood, userFood);
       this.userProductsLunch = this.userProductsLunch.filter( t => t.foodId !== userFood.foodId);
+      this.accountService.subject.next(this.sumFood.calories);
     }, error => console.error(error));
   }
 
@@ -298,6 +311,7 @@ export class UserFoodDiaryComponent implements OnInit {
       this.addFoodChangesSubtract(this.sumDinner, userFood);
       this.addFoodChangesSubtract(this.sumFood, userFood);
       this.userProductsDinner = this.userProductsDinner.filter( t => t.foodId !== userFood.foodId);
+      this.accountService.subject.next(this.sumFood.calories);
     }, error => console.error(error));
   }
 
@@ -306,6 +320,7 @@ export class UserFoodDiaryComponent implements OnInit {
       this.addFoodChangesSubtract(this.sumSnack, userFood);
       this.addFoodChangesSubtract(this.sumFood, userFood);
       this.userProductsSnack = this.userProductsSnack.filter( t => t.foodId !== userFood.foodId);
+      this.accountService.subject.next(this.sumFood.calories);
     }, error => console.error(error));
   }
 

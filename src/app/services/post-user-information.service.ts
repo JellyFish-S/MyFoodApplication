@@ -17,7 +17,7 @@ export class PostUserInformationService {
   }
 
 
-  postNewWeight(userWeight: UserWeight): Observable<UserWeight> {
-    return this.http.post<UserWeight>(`${environment.fbDbUrl}/weight.json`, userWeight);
+  postNewWeight(userWeight: UserWeight): Observable<ResponseName> {
+    return this.http.post<ResponseName>(`${environment.fbDbUrl}/weight.json`, userWeight);
   }
   }
