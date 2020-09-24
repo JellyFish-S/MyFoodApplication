@@ -4,7 +4,7 @@ import {FirebaseUserInterface} from '../../interfaces';
 import {CheckUserIdService} from '../../services/check-user-id.service';
 import {Subscription} from 'rxjs';
 import {DateService} from '../../services/date.service';
-
+import * as echarts from 'echarts';
 
 
 @Component({
@@ -26,7 +26,6 @@ export class DonutsComponent implements OnInit {
     private  dateService: DateService,
   ) {}
 
-
   async ngOnInit(): Promise<void> {
     this.caloriesLeft = 0;
     this.userInformation = await this.checkUserIdService.getUserInformationFromFirebase();
@@ -43,12 +42,11 @@ export class DonutsComponent implements OnInit {
       });
     });
     this.kgNow = this.accountService.sendWeightNow(this.kgNow);
-    this.kgLeft = this.userInformation.goalWeight - this.kgNow;
+    this.kgLeft = Math.abs(this.userInformation.goalWeight - this.kgNow);
     this.subscriptionWeight = this.accountService.weightSubject.subscribe(message => {
       this.kgLeft = 0;
       this.kgNow = message;
-      console.log(message, this.userInformation.goalWeight);
-      this.kgLeft = this.userInformation.goalWeight - this.kgNow;
+      this.kgLeft = Math.abs(this.userInformation.goalWeight - this.kgNow);
     });
-    }
+  }
 }

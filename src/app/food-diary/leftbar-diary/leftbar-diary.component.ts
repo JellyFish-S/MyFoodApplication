@@ -46,12 +46,10 @@ export class LeftbarDiaryComponent implements OnInit {
         this.weight = this.userWeight.weight;
         this.date = this.userWeight.date;
       });
-      console.log(this.weight);
       this.isLoaded = true;
       this.accountService.weightSubject.next(this.weight);
       this.accountService.getWeightNow(this.weight);
     });
-    console.log(this.weight);
   }
 
   openCalorieGoal(): void {
@@ -104,7 +102,6 @@ export class LeftbarDiaryComponent implements OnInit {
       if (this.identicalSum === 0) {
           this.postUserInformationService.postNewWeight(this.userWeight).subscribe((weight) => {
             this.userWeight.weightDBID = weight.name;
-            console.log(this.userWeight);
             const updatesWeight = {};
             updatesWeight[`weight/${weight.name}`] = this.userWeight;
             firebase.database().ref().update(updatesWeight);
