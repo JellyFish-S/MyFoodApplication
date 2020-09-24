@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CheckUserIdService} from '../../services/check-user-id.service';
 import {FirebaseUserInterface, UserWeight} from '../../interfaces';
 import * as firebase from 'firebase';
-import * as moment from 'moment';
 import {DateService} from '../../services/date.service';
 import {AccountService} from '../../services/account.service';
 import {PostUserInformationService} from '../../services/post-user-information.service';
@@ -48,6 +47,8 @@ export class LeftbarDiaryComponent implements OnInit {
         this.date = this.userWeight.date;
       });
       this.isLoaded = true;
+      this.accountService.weightSubject.next(this.weight);
+      this.accountService.getWeightNow(this.weight);
     });
   }
 
@@ -76,7 +77,6 @@ export class LeftbarDiaryComponent implements OnInit {
     for (const key in objDatabase) {
       if (objDatabase[key].userId === user.uid) {
         objArr.push(objDatabase[key]);
-        // console.log(objArr);
       }
     }
     return objArr;
@@ -102,7 +102,6 @@ export class LeftbarDiaryComponent implements OnInit {
       if (this.identicalSum === 0) {
           this.postUserInformationService.postNewWeight(this.userWeight).subscribe((weight) => {
             this.userWeight.weightDBID = weight.name;
-            console.log(this.userWeight);
             const updatesWeight = {};
             updatesWeight[`weight/${weight.name}`] = this.userWeight;
             firebase.database().ref().update(updatesWeight);
@@ -111,6 +110,8 @@ export class LeftbarDiaryComponent implements OnInit {
             this.date = this.userWeight.date;
           });
         }
+      this.accountService.weightSubject.next(this.weight);
+      this.accountService.getWeightNow(this.weight);
 
   }
 }

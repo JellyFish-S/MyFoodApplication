@@ -19,6 +19,10 @@ export class AccountService {
     userId: null
   };
 
+  private weightNow: UserWeight = {
+    weight: null
+  };
+
   private dailySum: SumNumbersFoodDiary = {
     protein: null,
     fat: null,
@@ -33,6 +37,7 @@ export class AccountService {
   };
 
   public subject = new Subject<any>();
+  public weightSubject = new Subject<any>();
 
   public getUserId(userId: string): void {
     this.account.userId = userId;
@@ -94,5 +99,13 @@ export class AccountService {
 
   public dailyCalories(sumCalories): number {
     return  sumCalories = this.dailySum.calories;
+  }
+
+  public getWeightNow(weight: number): void {
+    this.weightNow.weight = weight;
+  }
+
+  public sendWeightNow(weightNow: number): number {
+    return  weightNow = this.weightNow.weight;
   }
 }
