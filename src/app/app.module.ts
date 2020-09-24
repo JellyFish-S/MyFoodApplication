@@ -28,6 +28,7 @@ import {AngularFireDatabase} from '@angular/fire/database';
 import {CheckUserIdService} from './services/check-user-id.service';
 import * as firebase from 'firebase';
 import {MomentPipe} from './pipes/moment.pipe';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 
 
@@ -71,7 +72,8 @@ firebase.initializeApp(firebaseConfig);
     ReactiveFormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgxEchartsModule
   ],
   providers: [
     AuthGuard,

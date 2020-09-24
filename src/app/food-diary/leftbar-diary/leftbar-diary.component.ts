@@ -66,6 +66,7 @@ export class LeftbarDiaryComponent implements OnInit {
       updates[`users/${objDatabase.userDbId}`] = objDatabase;
       firebase.database().ref().update(updates);
       this.userInformation.caloriesGoal = this.newCalorieGoal;
+      this.accountService.caloriesSubject.next(this.userInformation.caloriesGoal);
     });
   }
 
