@@ -38,6 +38,7 @@ export class AccountService {
 
   public subject = new Subject<any>();
   public weightSubject = new Subject<any>();
+  public caloriesSubject = new Subject<any>();
 
   public getUserId(userId: string): void {
     this.account.userId = userId;

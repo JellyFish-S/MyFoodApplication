@@ -1,22 +1,14 @@
-<div class="card">
-  <p>Kg to goal</p>
-  <div class="donut-chart chart1">
-    <div class="slice one"></div>
-    <div class="slice two"></div>
-    <div class="chart-center">
-      <span>{{kgLeft}} kg</span>
-    </div>
+
+<div class="chart">
+  <div class="card">
+    <p>Kg to goal</p>
+    <div echarts [options]="optionWeight" class="demo-chart"></div>
   </div>
 
-</div>
-<div class="card">
-  <p>Calories left</p>
-  <div class="donut-chart chart1">
-    <div class="slice one"></div>
-    <div class="slice two"></div>
-    <div class="chart-center">
-      <span>{{caloriesLeft}}</span>
-    </div>
+  <div class="card">
+    <p>Calories left</p>
+    <div echarts [options]="optionCalories" class="demo-chart"></div>
   </div>
+
 </div>
 
