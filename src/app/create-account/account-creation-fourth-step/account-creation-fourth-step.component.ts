@@ -75,7 +75,6 @@ export class AccountCreationFourthStepComponent implements OnInit {
             this.userWeight.weightDBID = weight.name;
             this.userWeight = this.accountService
               .getStartedWeight(userParamsAndGoal.userId, userParamsAndGoal.userDbId, this.userWeight.weightDBID);
-            console.log(this.userWeight);
             const updatesWeight = {};
             updatesWeight[`weight/${weight.name}`] = this.userWeight;
             firebase.database().ref().update(updatesWeight);
