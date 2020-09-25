@@ -1,1 +1,12 @@
-<p>statistics works!</p>
+<div class="wrap" *ngIf="isLoaded">
+  <div class="left-bar">
+    <mf-leftbar-diary></mf-leftbar-diary>
+    <mf-calendar></mf-calendar>
+  </div>
+  <div class="statistics">
+    <div class="weight-progress">
+      <div echarts [options]="optionWeight" class="demo-chart"></div>
+    </div>
+
+  </div>
+</div>

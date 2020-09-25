@@ -1,0 +1,15 @@
+.wrap {
+  display: flex;
+  max-width: 1440px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.left-bar {
+  flex: 2;
+}
+.statistics {
+  flex: 3;
+}
+.weight-progress {
+  margin-top: 60px;
+}
