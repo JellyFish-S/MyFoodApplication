@@ -7,6 +7,7 @@ import {RegistrationService} from '../../services/registration.service';
 import UserCredential = firebase.auth.UserCredential;
 import {PostUserInformationService} from '../../services/post-user-information.service';
 import * as firebase from 'firebase';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'mf-account-creation-fourth-step',
@@ -32,7 +33,8 @@ export class AccountCreationFourthStepComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private registrationService: RegistrationService,
-    private postUserInformation: PostUserInformationService
+    private postUserInformation: PostUserInformationService,
+    private router: Router
     ) {}
 
   ngOnInit(): void {
@@ -73,7 +75,6 @@ export class AccountCreationFourthStepComponent implements OnInit {
             this.userWeight.weightDBID = weight.name;
             this.userWeight = this.accountService
               .getStartedWeight(userParamsAndGoal.userId, userParamsAndGoal.userDbId, this.userWeight.weightDBID);
-            console.log(this.userWeight);
             const updatesWeight = {};
             updatesWeight[`weight/${weight.name}`] = this.userWeight;
             firebase.database().ref().update(updatesWeight);
@@ -81,7 +82,8 @@ export class AccountCreationFourthStepComponent implements OnInit {
           });
           this.form.reset();
       });
-      alert('Registration successful');
+      alert('Registration successful! You may login now');
+      await this.router.navigate(['/login']);
     } catch (error) {
       this.errorForm = true;
       this.submitted = false;

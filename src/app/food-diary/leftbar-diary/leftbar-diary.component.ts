@@ -14,6 +14,7 @@ import {PostUserInformationService} from '../../services/post-user-information.s
 })
 export class LeftbarDiaryComponent implements OnInit {
   userInformation: FirebaseUserInterface;
+  public isDisabledButtonWeight: boolean;
   private identicalSum: number;
   public isLoaded = false;
   public newCalorieGoal: number;
@@ -52,6 +53,11 @@ export class LeftbarDiaryComponent implements OnInit {
     });
   }
 
+  disabledWeightButton(): void {
+    this.isDisabledButtonWeight = false;
+    const date = new Date().toLocaleDateString('ru-Ru');
+    this.isDisabledButtonWeight = date !== this.dateService.date.value.format('DD.MM.YYYY').toString();
+  }
   openCalorieGoal(): void {
     this.isOpenCalorieGoal = !this.isOpenCalorieGoal;
   }

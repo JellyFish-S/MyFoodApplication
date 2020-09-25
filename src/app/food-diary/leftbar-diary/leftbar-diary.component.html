@@ -9,7 +9,7 @@
       <small>{{date}}</small>
       <p class="current-number">{{weight}} kg</p>
       <i class="fa fa-plus"
-         (click)="openChangeCurrentWeight()"
+         (click)="openChangeCurrentWeight(); disabledWeightButton()"
       ></i>
       <div class="input-weight-goal"
            *ngIf="isOpenChangeWeight"
@@ -19,7 +19,10 @@
           <i class="fa fa-times" (click)="openChangeCurrentWeight()"></i>
         </div>
         <button
+          [disabled]="isDisabledButtonWeight"
           (click)="sendNewUserWeight();openChangeCurrentWeight()">Change</button>
+        <span
+          *ngIf="isDisabledButtonWeight">You may change weight <br> only in current date</span>
       </div>
     </div>
     <div class="calorie-info">
