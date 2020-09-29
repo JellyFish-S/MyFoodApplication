@@ -11,6 +11,9 @@ import {Observable} from 'rxjs';
 })
 export class GetUserFoodService {
   productsArray: UserFood[] = [];
+  date = [];
+  dateFor = [];
+  calFor = [];
   url = 'https://myfoodapplication-93d13.firebaseio.com';
   constructor(private http: HttpClient) {
   }

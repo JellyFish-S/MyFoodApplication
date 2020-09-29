@@ -13,3 +13,24 @@
 .weight-progress {
   margin-top: 60px;
 }
+.average-calories {
+  margin-top: 60px;
+  p {
+    font-size: 1.8rem;
+    color: var(--dark-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  select {
+    outline: none;
+    width: 150px;
+    height: 30px;
+    border: 1px solid var(--dark-color);
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1.4rem;
+    option {
+      font-size: 1.4rem;
+    }
+  }
+}
