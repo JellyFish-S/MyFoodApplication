@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DateService} from '../../services/date.service';
-import {Week} from '../../interfaces';
+import {DateService} from '../../_common/services/date.service';
+import {Week} from '../../_common/interfaces';
 import * as moment from 'moment';
 import 'moment/locale/ru';
 

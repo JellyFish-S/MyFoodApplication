@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AccountService} from '../../services/account.service';
-import {CalculateCaloriesService} from '../../services/calculate-calories.service';
+import {AccountService} from '../../_common/services/account.service';
+import {CalculateCaloriesService} from '../../_common/services/calculate-calories.service';
 import {FormGroup} from '@angular/forms';
 
 @Component({
@@ -26,7 +26,6 @@ export class AccountCreationThirdStepComponent implements OnInit {
       this.calFromUser = this.calculateService.getCaloriesGoal();
   }
   public saveCalories(): void {
-    console.log(this.calFromUser);
     this.accountService.addCaloriesGoal(this.calFromUser);
     this.toTheNextStep.emit(true);
   }

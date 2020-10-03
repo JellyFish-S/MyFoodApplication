@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CheckUserIdService} from '../services/check-user-id.service';
+import {CheckUserIdService} from '../_common/services/check-user-id.service';
 
-import {FirebaseUserInterface} from '../interfaces';
+import {FirebaseUserInterface} from '../_common/interfaces';
 
 
 
