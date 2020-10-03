@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'registration', component: AccountCreationMainLayoutComponent},
   {path: 'diary', component: FoodDiaryComponent, canActivate: [AuthGuard]},
   {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard]},
+  { path: '**', component: StartPageComponent}
 ];
 
 @NgModule({
