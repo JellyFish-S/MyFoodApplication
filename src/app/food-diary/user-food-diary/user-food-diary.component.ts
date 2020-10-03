@@ -17,42 +17,40 @@ import {AccountService} from '../../services/account.service';
   styleUrls: ['./user-food-diary.component.scss']
 })
 export class UserFoodDiaryComponent implements OnInit {
-  foodType = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
-  isOpen = false;
-  isLoadBreakfast = false;
-  isLoadLunch = false;
-  isLoadDinner = false;
-  isLoadSnack = false;
-  productDB: ProductsDB;
-  arrOfProd: ProductsDB[] = [];
-  searchText = '';
-  weight = 100;
-  isInvalid: boolean;
-  userProductsBreakfast: UserFood[] = [];
-  userProductsLunch: UserFood[] = [];
-  userProductsDinner: UserFood[] = [];
-  userProductsSnack: UserFood[] = [];
-  idx: number;
-  sumBreakfast: SumNumbersFoodDiary;
-  isLoadSumBreakfast = false;
-  sumLunch: SumNumbersFoodDiary;
-  isLoadSumLunch = false;
-  sumDinner: SumNumbersFoodDiary;
-  isLoadSumDinner = false;
-  sumSnack: SumNumbersFoodDiary;
-  isLoadSumSnack = false;
-  sumFoodArray: SumNumbersFoodDiary[] = [];
-  isLoadSumFood = false;
-  sumFood: SumNumbersFoodDiary;
+  public foodType = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+  public isOpen = false;
+  public isLoadBreakfast = false;
+  public isLoadLunch = false;
+  public isLoadDinner = false;
+  public isLoadSnack = false;
+  public arrOfProd: ProductsDB[] = [];
+  public searchText = '';
+  public weight = 100;
+  public userProductsBreakfast: UserFood[] = [];
+  public userProductsLunch: UserFood[] = [];
+  public userProductsDinner: UserFood[] = [];
+  public userProductsSnack: UserFood[] = [];
+  public idx: number;
+  public sumBreakfast: SumNumbersFoodDiary;
+  public isLoadSumBreakfast = false;
+  public sumLunch: SumNumbersFoodDiary;
+  public isLoadSumLunch = false;
+  public sumDinner: SumNumbersFoodDiary;
+  public isLoadSumDinner = false;
+  public sumSnack: SumNumbersFoodDiary;
+  public isLoadSumSnack = false;
+  private sumFoodArray: SumNumbersFoodDiary[] = [];
+  public isLoadSumFood = false;
+  public sumFood: SumNumbersFoodDiary;
 
 
   constructor(
     public  dateService: DateService,
-    public addProductToFoodDiaryService: AddProductToFoodDiaryService,
-    public postUserFood: PostUserFoodService,
-    public checkUserIdService: CheckUserIdService,
-    public getUserFoodFromFirebase: GetUserFoodService,
-    public accountService: AccountService
+    private addProductToFoodDiaryService: AddProductToFoodDiaryService,
+    private postUserFood: PostUserFoodService,
+    private checkUserIdService: CheckUserIdService,
+    private getUserFoodFromFirebase: GetUserFoodService,
+    private accountService: AccountService
   ) {
   }
 
@@ -172,8 +170,6 @@ export class UserFoodDiaryComponent implements OnInit {
   public fetchProducts(): void {
     this.addProductToFoodDiaryService.getProductInformationFromFB(this.searchText)
       .then(array => {
-        // console.log(this.arrOfProd);
-        // console.log(this.searchText);
         this.arrOfProd = array;
       });
   }
