@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AccountService} from '../../services/account.service';
-import {CalculateCaloriesService} from '../../services/calculate-calories.service';
+import {AccountService} from '../../_common/services/account.service';
+import {CalculateCaloriesService} from '../../_common/services/calculate-calories.service';
 
 
 

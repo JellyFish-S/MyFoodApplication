@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {CheckUserIdService} from '../../services/check-user-id.service';
-import {FirebaseUserInterface, UserWeight} from '../../interfaces';
+import {CheckUserIdService} from '../../_common/services/check-user-id.service';
+import {FirebaseUserInterface, UserWeight} from '../../_common/interfaces';
 import * as firebase from 'firebase';
-import {DateService} from '../../services/date.service';
-import {AccountService} from '../../services/account.service';
-import {PostUserInformationService} from '../../services/post-user-information.service';
+import {DateService} from '../../_common/services/date.service';
+import {AccountService} from '../../_common/services/account.service';
+import {PostUserInformationService} from '../../_common/services/post-user-information.service';
 
 
 @Component({

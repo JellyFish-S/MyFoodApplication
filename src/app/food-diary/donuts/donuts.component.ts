@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from '../../services/account.service';
-import {FirebaseUserInterface} from '../../interfaces';
-import {CheckUserIdService} from '../../services/check-user-id.service';
+import {AccountService} from '../../_common/services/account.service';
+import {FirebaseUserInterface} from '../../_common/interfaces';
+import {CheckUserIdService} from '../../_common/services/check-user-id.service';
 import {Subscription} from 'rxjs';
-import {DateService} from '../../services/date.service';
+import {DateService} from '../../_common/services/date.service';
 
 
 @Component({

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {DateService} from '../../services/date.service';
-import {ProductsDB, SumNumbersFoodDiary, UserFood} from '../../interfaces';
-import {AddProductToFoodDiaryService} from '../../services/add-product-to-food-diary.service';
-import {PostUserFoodService} from '../../services/post-user-food.service';
-import {CheckUserIdService} from '../../services/check-user-id.service';
-import {GetUserFoodService} from '../../services/get-user-food.service';
+import {DateService} from '../../_common/services/date.service';
+import {ProductsDB, SumNumbersFoodDiary, UserFood} from '../../_common/interfaces';
+import {AddProductToFoodDiaryService} from '../../_common/services/add-product-to-food-diary.service';
+import {PostUserFoodService} from '../../_common/services/post-user-food.service';
+import {CheckUserIdService} from '../../_common/services/check-user-id.service';
+import {GetUserFoodService} from '../../_common/services/get-user-food.service';
 import {map, switchMap} from 'rxjs/operators';
 import * as firebase from 'firebase';
-import {AccountService} from '../../services/account.service';
+import {AccountService} from '../../_common/services/account.service';
 
 
 

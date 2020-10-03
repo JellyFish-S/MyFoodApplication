@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {User} from '../interfaces';
-import {AuthService} from '../services/auth.service';
+import {User} from '../_common/interfaces';
+import {AuthService} from '../_common/services/auth.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import UserCredential = firebase.auth.UserCredential;
 

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {AccountService} from '../../services/account.service';
-import {CalculateCaloriesService} from '../../services/calculate-calories.service';
+import {AccountService} from '../../_common/services/account.service';
+import {CalculateCaloriesService} from '../../_common/services/calculate-calories.service';
 import {FormGroup} from '@angular/forms';
 
 @Component({

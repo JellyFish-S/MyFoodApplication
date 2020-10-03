@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseUserInterface, UserWeight} from '../interfaces';
-import {CheckUserIdService} from '../services/check-user-id.service';
+import {FirebaseUserInterface, UserWeight} from '../_common/interfaces';
+import {CheckUserIdService} from '../_common/services/check-user-id.service';
 import * as firebase from 'firebase';
 import {Subscription} from 'rxjs';
-import {AccountService} from '../services/account.service';
+import {AccountService} from '../_common/services/account.service';
 
 @Component({
   selector: 'mf-statistics',
@@ -19,7 +19,6 @@ export class StatisticsComponent implements OnInit {
   optionWeight: any;
   optionCalories: any;
   month: string;
-  private subscriptionWeight: Subscription;
   private sumCalories: number;
   private subscription: Subscription;
   private calorieMonth = [];
@@ -35,13 +34,8 @@ export class StatisticsComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.userInformation = await this.checkUserIdService.getUserInformationFromFirebase();
     this.isLoaded = true;
-    await this.GetUserWeight().then(() => {
+    await this.getUserWeight().then(() => {
       this.createWeightProgressGraphic();
-    });
-    this.subscriptionWeight = this.accountService.weightSubject.subscribe(() => {
-      this.GetUserWeight().then(() => {
-        this.createWeightProgressGraphic();
-      });
     });
 
     this.sumCalories = this.userInformation.caloriesGoal;
@@ -50,7 +44,14 @@ export class StatisticsComponent implements OnInit {
   });
 
   }
-  async GetUserWeight(): Promise<UserWeight[]> {
+
+  async updateWeightGraphic(): Promise<void> {
+    await this.getUserWeight().then(() => {
+      this.createWeightProgressGraphic();
+    });
+  }
+
+  async getUserWeight(): Promise<UserWeight[]> {
     this.weightArr = [];
     this.goalWeightArr = [];
     this.dateArr = [];
@@ -120,7 +121,7 @@ export class StatisticsComponent implements OnInit {
     };
   }
 
-  async GetFoodFromFirebase(food: string, arrCalories): Promise<any> {
+  async getFoodFromFirebase(food: string, arrCalories): Promise<any> {
     const dataSnapShot = await firebase.database().ref(`${food}/`).once('value');
     const objDatabase = dataSnapShot.val();
     const user = await firebase.auth().currentUser;
@@ -151,7 +152,7 @@ export class StatisticsComponent implements OnInit {
     }
   }
 
-  async GetAllFood(month: string): Promise<any> {
+  async getAllFood(month: string): Promise<any> {
     const breakfast = [];
     const lunch = [];
     const dinner = [];
@@ -159,10 +160,10 @@ export class StatisticsComponent implements OnInit {
     this.dateMonth = [];
     this.caloriesMonth = [];
     this.calorieMonth = [];
-    const breakfastArr = await this.GetFoodFromFirebase('breakfast', breakfast);
-    const lunchArr = await this.GetFoodFromFirebase('lunch', lunch);
-    const dinnerArr = await this.GetFoodFromFirebase('dinner', dinner);
-    const snackArr = await this.GetFoodFromFirebase('snack', snack);
+    const breakfastArr = await this.getFoodFromFirebase('breakfast', breakfast);
+    const lunchArr = await this.getFoodFromFirebase('lunch', lunch);
+    const dinnerArr = await this.getFoodFromFirebase('dinner', dinner);
+    const snackArr = await this.getFoodFromFirebase('snack', snack);
     const cal = [];
     cal.push(...breakfastArr, ...lunchArr, ...dinnerArr, ...snackArr);
     cal.sort((a, b) => a.date > b.date ? 1 : -1);

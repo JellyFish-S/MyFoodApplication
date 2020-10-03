@@ -1,11 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ComparePassword} from '../../validators/confirm-password.validator';
-import {AccountService} from '../../services/account.service';
-import {ContactInfo, FirebaseUserInterface, UserWeight} from '../../interfaces';
-import {RegistrationService} from '../../services/registration.service';
+import {ComparePassword} from '../../_common/validators/confirm-password.validator';
+import {AccountService} from '../../_common/services/account.service';
+import {ContactInfo, FirebaseUserInterface, UserWeight} from '../../_common/interfaces';
+import {RegistrationService} from '../../_common/services/registration.service';
 import UserCredential = firebase.auth.UserCredential;
-import {PostUserInformationService} from '../../services/post-user-information.service';
+import {PostUserInformationService} from '../../_common/services/post-user-information.service';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 
