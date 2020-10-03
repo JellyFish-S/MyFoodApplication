@@ -9,11 +9,11 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./account-creation-third-step.component.scss']
 })
 export class AccountCreationThirdStepComponent implements OnInit {
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output() toTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
   public calRecommended: number;
   public calFromUser: number;
-  form: FormGroup;
+  public form: FormGroup;
 
   constructor(
     private accountService: AccountService,
@@ -28,6 +28,6 @@ export class AccountCreationThirdStepComponent implements OnInit {
   public saveCalories(): void {
     console.log(this.calFromUser);
     this.accountService.addCaloriesGoal(this.calFromUser);
-    this.onTheNextStep.emit(true);
+    this.toTheNextStep.emit(true);
   }
 }

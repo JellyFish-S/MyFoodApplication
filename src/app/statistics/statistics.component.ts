@@ -45,10 +45,8 @@ export class StatisticsComponent implements OnInit {
     });
 
     this.sumCalories = this.userInformation.caloriesGoal;
-    console.log(this.sumCalories);
     this.subscription = this.accountService.subject.subscribe(message => {
       this.sumCalories = message;
-      console.log(this.sumCalories);
   });
 
   }

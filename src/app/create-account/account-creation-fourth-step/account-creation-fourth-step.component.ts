@@ -15,12 +15,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./account-creation-fourth-step.component.scss']
 })
 export class AccountCreationFourthStepComponent implements OnInit {
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() toTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  form: FormGroup;
-  submitted = false;
-  errorForm: boolean;
+  public form: FormGroup;
+  public submitted = false;
   public userWeight: UserWeight = {
     weight: null,
     userId: null,
@@ -58,12 +56,11 @@ export class AccountCreationFourthStepComponent implements OnInit {
       password: this.form.value.password
     };
     this.accountService.addContactInfo(contactInfo);
-    this.onTheNextStep.emit(true);
+    this.toTheNextStep.emit(true);
     try {
       const auth: UserCredential = await this.registrationService.register(contactInfo.email, contactInfo.password);
       this.accountService.getUserId(auth.user.uid);
       this.submitted = false;
-      this.errorForm = false;
       const userParamsAndGoal: FirebaseUserInterface = this.accountService.getUserParamsFirebase();
       this.postUserInformation.create(userParamsAndGoal)
         .subscribe((res) => {
@@ -85,10 +82,8 @@ export class AccountCreationFourthStepComponent implements OnInit {
       alert('Registration successful! You may login now');
       await this.router.navigate(['/login']);
     } catch (error) {
-      this.errorForm = true;
       this.submitted = false;
       alert('Invalid information. Please check it');
     }
   }
-
 }

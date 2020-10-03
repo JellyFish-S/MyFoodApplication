@@ -7,18 +7,18 @@
 
       <mf-account-creation-first-step
         *ngIf="counter === 1"
-        (onTheNextStep)="updateCounter()">
+        (toTheNextStep)="updateCounter()">
 
       </mf-account-creation-first-step>
 
       <mf-account-creation-second-step
         *ngIf="counter === 2"
-        (onTheNextStep)="updateCounter()"
+        (toTheNextStep)="updateCounter()"
       ></mf-account-creation-second-step>
 
       <mf-account-creation-third-step
         *ngIf="counter === 3"
-        (onTheNextStep)="updateCounter()"
+        (toTheNextStep)="updateCounter()"
       ></mf-account-creation-third-step>
 
       <mf-account-creation-fourth-step

@@ -12,9 +12,8 @@ import {UserParams} from '../../interfaces';
 })
 export class AccountCreationSecondStepComponent implements OnInit {
 
-  form: FormGroup;
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public form: FormGroup;
+  @Output() toTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
 
 
   constructor(
@@ -38,7 +37,7 @@ export class AccountCreationSecondStepComponent implements OnInit {
     };
     this.calculateCalories.addUserParams(userParams);
     this.accountService.addUserParams(userParams, this.form.value.goalWeight);
-    this.onTheNextStep.emit(true);
+    this.toTheNextStep.emit(true);
   }
 
 }

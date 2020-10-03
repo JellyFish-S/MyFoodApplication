@@ -11,9 +11,8 @@ import {CalculateCaloriesService} from '../../services/calculate-calories.servic
   styleUrls: ['./account-creation.component-first-step.scss']
 })
 export class AccountCreationFirstStepComponent implements OnInit {
-  form: FormGroup;
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() onTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
+  public form: FormGroup;
+  @Output() toTheNextStep: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
     private accountService: AccountService,
@@ -30,6 +29,6 @@ export class AccountCreationFirstStepComponent implements OnInit {
   saveGoal(): void {
     this.accountService.addGoal(this.form.value.goal);
     this.calculateCalories.addGoal(this.form.value.goal);
-    this.onTheNextStep.emit(true);
+    this.toTheNextStep.emit(true);
   }
 }
