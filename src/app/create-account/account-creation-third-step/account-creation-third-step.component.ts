@@ -26,7 +26,6 @@ export class AccountCreationThirdStepComponent implements OnInit {
       this.calFromUser = this.calculateService.getCaloriesGoal();
   }
   public saveCalories(): void {
-    console.log(this.calFromUser);
     this.accountService.addCaloriesGoal(this.calFromUser);
     this.toTheNextStep.emit(true);
   }

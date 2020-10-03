@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './_common/navbar/navbar.component';
@@ -8,7 +8,7 @@ import { MainpageLoginComponent } from './mainpage-login/mainpage-login.componen
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from './_common/services/auth.guard';
 import {CalculateCaloriesService} from './_common/services/calculate-calories.service';
 import {AccountCreationFirstStepComponent} from './create-account/account-creation-first-step/account-creation-first-step.component';
@@ -29,6 +29,7 @@ import {CheckUserIdService} from './_common/services/check-user-id.service';
 import * as firebase from 'firebase';
 import {MomentPipe} from './_common/pipes/moment.pipe';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {AuthInterceptor} from './_common/auth.inteceptor';
 
 
 
@@ -45,6 +46,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor
+};
 
 @NgModule({
   declarations: [
@@ -82,7 +88,8 @@ firebase.initializeApp(firebaseConfig);
     PostUserInformationService,
     CheckUserIdService,
     AngularFireDatabase,
-    AngularFireAuth
+    AngularFireAuth,
+    INTERCEPTOR_PROVIDER
   ],
 
   bootstrap: [AppComponent]

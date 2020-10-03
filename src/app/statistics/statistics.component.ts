@@ -175,7 +175,6 @@ export class StatisticsComponent implements OnInit {
       this.goalCalorieArr.push(this.userInformation.caloriesGoal);
     });
     this.createAverageCalories();
-    console.log( this.caloriesMonth, this.dateMonth);
     return this.calorieMonth;
   }
   createAverageCalories(): void {

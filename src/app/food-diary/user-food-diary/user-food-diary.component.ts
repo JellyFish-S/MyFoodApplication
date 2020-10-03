@@ -220,7 +220,6 @@ export class UserFoodDiaryComponent implements OnInit {
       this.postUserFood.createBreakfast(foodObj).pipe(map(res => {
         foodObj.foodId = res.name;
       })).subscribe( () => {
-        console.log('Added');
         const updates = {};
         updates[`breakfast/${foodObj.date}/${foodObj.foodId}`] = foodObj;
         firebase.database().ref().update(updates);
@@ -238,7 +237,6 @@ export class UserFoodDiaryComponent implements OnInit {
         foodObj.foodId = res.name;
 
       })).subscribe( () => {
-        console.log('Added');
         const updates = {};
         updates[`lunch/${foodObj.date}/${foodObj.foodId}`] = foodObj;
         firebase.database().ref().update(updates);
@@ -255,7 +253,6 @@ export class UserFoodDiaryComponent implements OnInit {
       this.postUserFood.createDinner(foodObj).pipe(map(res => {
         foodObj.foodId = res.name;
       })).subscribe( () => {
-        console.log('Added');
         const updates = {};
         updates[`dinner/${foodObj.date}/${foodObj.foodId}`] = foodObj;
         firebase.database().ref().update(updates);
@@ -272,7 +269,6 @@ export class UserFoodDiaryComponent implements OnInit {
       this.postUserFood.createSnack(foodObj).pipe(map(res => {
         foodObj.foodId = res.name;
       })).subscribe( () => {
-        console.log('Added');
         const updates = {};
         updates[`snack/${foodObj.date}/${foodObj.foodId}`] = foodObj;
         firebase.database().ref().update(updates);
