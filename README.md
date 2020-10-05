@@ -26,10 +26,6 @@
 6) Запустите проект, введя в терминале следующую команду: `npm start`
 7) Откройте ссылку в терминале (localhost), чтобы открыть приложение в браузере
 
-ИЛИ:
-
-Вы можете перейти по ссылке [Herocu](), чтобы открыть приложение в облачной платформе.
-
 ## Как начать пользоваться приложением
 
 1) Вы можете зарегистрироваться в приложении
@@ -74,10 +70,6 @@ It helps the user to keep track of the amount of calories consumed, and the dyna
 5) On a terminal window and run the command: `npm install`
 6) To run the project use command on a terminal window: `npm start`
 7) Open the localhost link in the terminal to use the application
-
-OR:
-
-You can follow the link [Herocu]() to open application on cloud platform.
 
 ## How to start use application
 
